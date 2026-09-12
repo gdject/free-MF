@@ -1,0 +1,124 @@
+name: Cleanup Actions Runs
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "仅预览，不删除运行记录"
+        required: true
+        default: true
+        type: boolean
+      retention_days:
+        description: "保留最近多少天的记录；0 表示清理全部已完成记录"
+        required: true
+        default: "0"
+        type: string
+
+permissions:
+  actions: write
+
+concurrency:
+  group: cleanup-actions-runs
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      CURRENT_RUN_ID: ${{ github.run_id }}
+      DRY_RUN: ${{ inputs.dry_run }}
+      RETENTION_DAYS: ${{ inputs.retention_days }}
+      MAX_DELETES: "1000"
+    steps:
+      - name: Validate inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RETENTION_DAYS" =~ ^[0-9]+$ ]] || {
+            echo "[!] retention_days 必须是非负整数" >&2
+            exit 1
+          }
+          echo "[*] 仓库: $REPO"
+          echo "[*] dry_run: $DRY_RUN"
+          echo "[*] retention_days: $RETENTION_DAYS"
+          echo "[*] 当前清理任务 ID: $CURRENT_RUN_ID"
+
+      - name: Collect completed runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --paginate --slurp \
+            "repos/$REPO/actions/runs?status=completed&per_page=100" \
+            > /tmp/actions-pages.json
+          jq -s 'add | map(.workflow_runs // []) | add // []' \
+            /tmp/actions-pages.json > /tmp/actions-runs.json
+          echo "[*] API 返回记录: $(jq 'length' /tmp/actions-runs.json)"
+
+      - name: Preview or delete completed runs
+        shell: bash
+        run: |
+          set -uo pipefail
+          now=$(date -u +%s)
+          cutoff=0
+          if (( RETENTION_DAYS > 0 )); then
+            cutoff=$((now - RETENTION_DAYS * 86400))
+          fi
+
+          candidates=0
+          deleted=0
+          failed=0
+          skipped=0
+
+          while IFS= read -r run; do
+            run_id=$(jq -r '.id // empty' <<<"$run")
+            status=$(jq -r '.status // empty' <<<"$run")
+            created_at=$(jq -r '.created_at // empty' <<<"$run")
+            created_epoch=$(date -u -d "$created_at" +%s 2>/dev/null || echo 0)
+            workflow_name=$(jq -r '.name // .path // "unknown"' <<<"$run")
+            run_number=$(jq -r '.run_number // "?"' <<<"$run")
+            conclusion=$(jq -r '.conclusion // "?"' <<<"$run")
+
+            [[ -n "$run_id" ]] || continue
+            if [[ "$run_id" == "$CURRENT_RUN_ID" || "$status" != "completed" ]]; then
+              skipped=$((skipped + 1))
+              continue
+            fi
+            if (( cutoff > 0 && created_epoch >= cutoff )); then
+              skipped=$((skipped + 1))
+              continue
+            fi
+            if (( candidates >= MAX_DELETES )); then
+              echo "[!] 已达到 MAX_DELETES=$MAX_DELETES，后续记录跳过"
+              break
+            fi
+
+            candidates=$((candidates + 1))
+            echo "[候选] id=$run_id workflow=$workflow_name run_number=$run_number status=$status conclusion=$conclusion created_at=$created_at"
+            if [[ "$DRY_RUN" == "true" ]]; then
+              continue
+            fi
+
+            latest=$(gh api "repos/$REPO/actions/runs/$run_id" 2>/dev/null || true)
+            latest_status=$(jq -r '.status // empty' <<<"$latest")
+            if [[ "$latest_status" != "completed" || "$run_id" == "$CURRENT_RUN_ID" ]]; then
+              echo "[跳过] id=$run_id 状态已变化或为当前运行"
+              skipped=$((skipped + 1))
+              continue
+            fi
+
+            if gh api --method DELETE "repos/$REPO/actions/runs/$run_id" >/dev/null; then
+              deleted=$((deleted + 1))
+              echo "[已删除] id=$run_id"
+            else
+              failed=$((failed + 1))
+              echo "[警告] 删除失败 id=$run_id" >&2
+            fi
+          done < <(jq -c '.[]' /tmp/actions-runs.json)
+
+          echo "[*] 候选=$candidates 已删除=$deleted 跳过=$skipped 失败=$failed dry_run=$DRY_RUN"
+          if (( failed > 0 )); then
+            exit 1
+          fi

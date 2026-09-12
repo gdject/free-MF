@@ -2449,8 +2449,12 @@ def export_singbox_json(sb_nodes, filepath):
 # README 生成
 # ═══════════════════════════════════════════N═══════════════════════
 
-def update_readme(export_stats):
-    repo_name = os.environ.get("GITHUB_REPOSITORY", "hezhanleiok/freesub").strip()
+def update_readme(export_stats, output_repository=None, readme_path=None):
+    repo_name = (output_repository or os.environ.get("OUTPUT_REPOSITORY", "")).strip()
+    if not repo_name:
+        repo_name = os.environ.get("GITHUB_REPOSITORY", "hezhanleiok/freesub").strip()
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo_name):
+        raise ValueError(f"输出仓库名称无效，应为 owner/repo: {repo_name!r}")
     cache_bust = int(time.time())
     all_counts = export_stats["all"]
     res_counts = export_stats["residential"]
@@ -2537,61 +2541,22 @@ def update_readme(export_stats):
 
 ---
 
-## 🔒 私有仓库（Private）无感免翻订阅方案 (基于 Cloudflare Workers)
+## 🔒 私有产物访问说明
 
-> 如果你希望将本 GitHub 仓库设置为 **Private (私有仓库)** 保护节点资产，外部客户端无法直接拉取原生 Raw 或公共 CDN 链接，可以通过以下 Cloudflare Worker 搭建轻量级私密网关反代：
+> 产物仓库 `gdject/free-MF-output` 为私有仓库，GitHub Raw/jsDelivr 通常不能被未授权客户端直接访问。请使用 Cloudflare Worker 或其他授权网关，并将只读 Token 保存为平台 Secret；不要把 Token 硬编码到 Worker、README 或订阅 URL。
 
-### 1. 获取 GitHub 永久个人令牌 (PAT)
-1. 进入 GitHub -> **Settings** -> **Developer Settings** -> **Personal access tokens (classic)**。
-2. 点击 **Generate new token (classic)**，勾选 `repo` 权限，有效期设为 `No expiration`（永不过期）。
-3. 复制保存生成的以 `ghp_` 开头的 Token。
+请将 Worker 的 GitHub 只读 Token 配置为 Secret（例如 `GITHUB_TOKEN`），并通过白名单路径读取 `gdject/free-MF-output` 的 `output/` 文件。网关应限制路径、做好限流并支持 Token 轮换。
 
-### 2. 部署 Cloudflare Worker
-登录 Cloudflare Dashboard，创建一个新的 Worker，复制以下脚本粘贴并部署（把 `OWNER`/`REPO`/`GITHUB_TOKEN` 改成你自己的）：
+推荐映射路径：
 
-```javascript
-export default {{
-  async fetch(request) {{
-    const GITHUB_TOKEN = "ghp_你的GitHub永久访问令牌";
-    const OWNER = "{owner}";
-    const REPO = "{repo}";
-    const BRANCH = "main";
-
-    const url = new URL(request.url);
-    const filePath = "output" + url.pathname;
-    const ghUrl = "https://raw.githubusercontent.com/" + OWNER + "/" + REPO + "/" + BRANCH + "/" + filePath;
-
-    const res = await fetch(ghUrl, {{
-      headers: {{
-        "Authorization": "token " + GITHUB_TOKEN,
-        "User-Agent": "Cloudflare-Worker"
-      }}
-    }});
-
-    if (!res.ok) {{
-      return new Response("Not Found", {{ status: 404 }});
-    }}
-
-    return new Response(await res.text(), {{
-      headers: {{
-        "Content-Type": "text/plain; charset=utf-8",
-        "Cache-Control": "no-cache"
-      }}
-    }});
-  }}
-}}
+```text
+/clash.yaml -> output/clash.yaml
+/v2ray.txt -> output/v2ray.txt
+/singbox.json -> output/singbox.json
+/residential.txt -> output/residential.txt
+/residential-clash.yaml -> output/residential-clash.yaml
+/residential-singbox.json -> output/residential-singbox.json
 ```
-
-### 3. 私有订阅链接映射方式
-部署后 Worker 会分配一个专属域名（例如 `my-sub.yourname.workers.dev`），你的客户端可以直接无感订阅：
-* **总 V2RayN 订阅**: `https://你的域名.workers.dev/v2ray.txt`
-* **总 Clash 订阅**: `https://你的域名.workers.dev/clash.yaml`
-* **所有家宽 V2RayN**: `https://你的域名.workers.dev/residential.txt`
-* **所有家宽 Clash**: `https://你的域名.workers.dev/residential-clash.yaml`
-* **所有家宽 sing-box**: `https://你的域名.workers.dev/residential-singbox.json`
-* **台湾家宽 V2RayN**: `https://你的域名.workers.dev/residential-by-country/TW.txt`
-* **香港家宽 Clash**: `https://你的域名.workers.dev/residential-by-country/clash-HK.yaml`
-* **日本家宽 sing-box**: `https://你的域名.workers.dev/residential-by-country/singbox-JP.json`
 
 ---
 
@@ -2602,11 +2567,13 @@ export default {{
 ---
 
 ## 🛠️ 项目使用说明
-1. **自动更新机制**：GitHub Actions 每 6 小时全自动运行并刷新上述全部订阅与数据。
-2. **测活标准**：节点必须通过 ① 端口预检 ② sing-box 实际隧道 3 个 generate_204 探测 ③ 真实出口 IP 穿透获取 ④ Cloudflare 5MB 限时下载 (吞吐 ≥ 70KB/s) ⑤ TLS 证书校验非 MITM, 方可入库。
+1. **自动发布机制**：GitHub Actions 每 3 小时从源码仓库运行测活，并将 README.md 和 output/ 发布到私有 `gdject/free-MF-output`。
+2. **测活标准**：节点必须通过 ① 端口预检 ② sing-box 实际隧道 3 个 generate_204 探测 ③ 真实出口 IP 穿透获取 ④ Cloudflare 限速下载断流检测 ⑤ TLS 证书校验非 MITM, 方可入库。
 3. **多客户端兼容**：Clash / v2rayN / sing-box 全格式订阅。
+4. **访问私有产物**：GitHub Raw/jsDelivr 对私有仓库通常不可匿名访问，请通过使用 Secret 的授权网关访问。
 """
-    with open(os.path.join(BASEDIR, "README.md"), "w", encoding="utf-8") as f:
+    readme_target = readme_path or os.environ.get("OUTPUT_README_PATH") or os.path.join(BASEDIR, "README.md")
+    with open(readme_target, "w", encoding="utf-8") as f:
         f.write(readme)
     print(f"[+] README.md 更新完毕: 总节点 {all_counts}, 家宽 {res_counts}")
 

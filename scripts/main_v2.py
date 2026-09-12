@@ -35,10 +35,12 @@ import tarfile
 import platform
 import subprocess
 import ipaddress
+import signal
+import threading
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, wait, FIRST_COMPLETED
 
 try:
     import requests
@@ -1351,6 +1353,17 @@ def build_test_config(outbound: dict, socks_port: int) -> dict:
 _PRINTED_ONCE = set()
 
 
+_LIVENESS_STOP = threading.Event()
+_LIVENESS_INTERRUPTED = False
+
+
+def _request_liveness_stop(signum, frame):
+    global _LIVENESS_INTERRUPTED
+    _LIVENESS_INTERRUPTED = True
+    _LIVENESS_STOP.set()
+    print(f"[!] 收到中断信号 {signum}，停止等待新测活任务；已完成结果将继续导出。")
+
+
 def print_once(key: str, msg: str):
     if key not in _PRINTED_ONCE:
         _PRINTED_ONCE.add(key)
@@ -1534,7 +1547,8 @@ def test_single_node(item, keep_alive_check=True):
             "is_stalled": is_stalled,
         }
         return result
-    except Exception:
+    except Exception as exc:
+        print(f"[!] 节点测活失败 {raw[:100]} → {str(exc)[:120]}")
         return None
     finally:
         if proc and proc.poll() is None:
@@ -1550,29 +1564,101 @@ def test_single_node(item, keep_alive_check=True):
             pass
 
 
+def _save_liveness_checkpoint(results: list, done_count: int, total_count: int):
+    """保存已完成测活结果，供中断后的本轮导出使用。"""
+    path = os.path.join(OUTPUT_DIR, ".liveness_results.json")
+    temp_path = path + ".tmp"
+    payload = {
+        "done": done_count,
+        "total": total_count,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "results": results,
+    }
+    try:
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        with open(temp_path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False)
+        os.replace(temp_path, path)
+    except Exception as exc:
+        print(f"[!] 测活中间结果保存失败（不影响继续测活）→ {exc}")
+        try:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+        except OSError:
+            pass
+
+
 def run_liveness_test(candidates: list) -> list:
     print(f"[*] sing-box 全协议真实测活: {len(candidates)} 节点 (并发 {MAX_WORKERS_TEST}) ...")
+    global _LIVENESS_INTERRUPTED
+    _LIVENESS_STOP.clear()
+    _LIVENESS_INTERRUPTED = False
     results = []
-    done_count = [0]
+    done_count = 0
+    previous_handlers = {}
+    if threading.current_thread() is threading.main_thread():
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            previous_handlers[sig] = signal.getsignal(sig)
+            signal.signal(sig, _request_liveness_stop)
 
     def _work(item):
-        return test_single_node(item)
+        try:
+            return test_single_node(item)
+        except Exception as exc:
+            print(f"[!] 单节点测活异常 {item[0][:100]} → {exc}")
+            return None
 
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS_TEST) as ex:
-        futs = {ex.submit(_work, it): it for it in candidates}
-        for fut in as_completed(futs):
-            done_count[0] += 1
-            r = fut.result()
-            if r:
-                results.append(r)
-            if done_count[0] % 40 == 0:
-                print(f"[*] 测活进度: {done_count[0]}/{len(candidates)}, 通过 {len(results)}")
+    executor = ThreadPoolExecutor(max_workers=MAX_WORKERS_TEST)
+    try:
+        candidate_iter = iter(candidates)
+        pending = set()
+        for _ in range(MAX_WORKERS_TEST):
+            try:
+                pending.add(executor.submit(_work, next(candidate_iter)))
+            except StopIteration:
+                break
+        while pending:
+            finished, pending = wait(pending, timeout=1, return_when=FIRST_COMPLETED)
+            if not finished:
+                if _LIVENESS_STOP.is_set():
+                    for future in pending:
+                        future.cancel()
+                    break
+                continue
+            for future in finished:
+                done_count += 1
+                try:
+                    result = future.result()
+                except Exception as exc:
+                    print(f"[!] 测活任务异常 → {exc}")
+                    result = None
+                if result:
+                    results.append(result)
+                if done_count % 40 == 0:
+                    _save_liveness_checkpoint(results, done_count, len(candidates))
+                    print(f"[*] 测活进度: {done_count}/{len(candidates)}, 通过 {len(results)}")
+                if not _LIVENESS_STOP.is_set():
+                    try:
+                        pending.add(executor.submit(_work, next(candidate_iter)))
+                    except StopIteration:
+                        pass
+            if _LIVENESS_STOP.is_set():
+                for future in pending:
+                    future.cancel()
+                break
+    finally:
+        executor.shutdown(wait=not _LIVENESS_STOP.is_set(), cancel_futures=True)
+        if threading.current_thread() is threading.main_thread():
+            for sig, handler in previous_handlers.items():
+                signal.signal(sig, handler)
 
     alive = [r for r in results if r["alive"] and not r["is_stalled"]]
+    _save_liveness_checkpoint(results, done_count, len(candidates))
     mitm = sum(1 for r in results if r["mitm_risk"])
     stalled = sum(1 for r in results if r["is_stalled"])
-    print(f"[+] 测活完成: 真活 {len(alive)} | 断流淘汰 {stalled} | MITM 风险 {mitm}")
-    return results  # 保留全部信息, 分类阶段再决定去留
+    warning = "（中断后使用已完成结果）" if _LIVENESS_INTERRUPTED else ""
+    print(f"[+] 测活完成: 真活 {len(alive)} | 断流淘汰 {stalled} | MITM 风险 {mitm} {warning}")
+    return results
 
 
 # ═══════════════════════════════════════════N═══════════════════════
@@ -2617,6 +2703,12 @@ def main():
         print("[!] 分类后无存活节点 — 保留上次 output")
         return
     total, res = export_all(unique_nodes, residential, non_residential)
+    try:
+        checkpoint = os.path.join(OUTPUT_DIR, ".liveness_results.json")
+        if os.path.exists(checkpoint):
+            os.remove(checkpoint)
+    except OSError as exc:
+        print(f"[!] 测活中间结果清理失败（不影响已生成订阅）→ {exc}")
     update_readme(total, res)
 
     # 统计报告

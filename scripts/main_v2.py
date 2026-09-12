@@ -2401,11 +2401,27 @@ def export_all(unique_nodes, residential, non_residential):
         export_singbox_json(s, os.path.join(RESIDENTIAL_COUNTRY_DIR, f"singbox-{cc}.json"))
 
     stats = {
+        "schemaVersion": 1,
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "repository": os.environ.get("OUTPUT_REPOSITORY", "").strip(),
         "all": counts(all_group),
         "residential": counts(res_group),
         "by_country": normal_counts,
         "residential_by_country": residential_counts,
     }
+    manifest_path = os.path.join(OUTPUT_DIR, "manifest.json")
+    manifest_tmp = manifest_path + ".tmp"
+    try:
+        with open(manifest_tmp, "w", encoding="utf-8") as f:
+            json.dump(stats, f, ensure_ascii=False, indent=2)
+        os.replace(manifest_tmp, manifest_path)
+    except Exception as exc:
+        print(f"[!] manifest 保存失败（不影响订阅导出）→ {exc}")
+        try:
+            if os.path.exists(manifest_tmp):
+                os.remove(manifest_tmp)
+        except OSError:
+            pass
     print(f"[*] 导出完毕: 全量 {stats['all']} | 家宽 {stats['residential']}")
     return stats
 

@@ -47,12 +47,50 @@ jobs:
 
       - name: Commit and Push Results
         run: |
+          set -e
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A output/ README.md
           if git diff --staged --quiet; then
             echo "没有节点变动与内容更新。"
-          else
-            git commit -m "Auto Update: $(date -u '+%Y-%m-%d %H:%M:%S') UTC"
-            git push
+            exit 0
           fi
+
+          git commit -m "Auto Update: $(date -u '+%Y-%m-%d %H:%M:%S') UTC"
+
+          # 测活期间可能有新的代码提交；提交生成结果前先同步最新 main。
+          # 生成的 output/ 和 README.md 以本轮结果为准，其余文件出现冲突时停止，避免覆盖人工修改。
+          for attempt in 1 2 3; do
+            echo "[*] 同步远程 main 后推送（第 ${attempt}/3 次）..."
+            git fetch origin main
+            if ! git rebase origin/main; then
+              conflicts=$(git diff --name-only --diff-filter=U)
+              can_resolve=true
+              while IFS= read -r file; do
+                [[ -n "$file" ]] || continue
+                case "$file" in
+                  README.md|output/*)
+                    git checkout --theirs -- "$file"
+                    git add -- "$file"
+                    ;;
+                  *)
+                    can_resolve=false
+                    echo "[!] 非生成文件发生 rebase 冲突，停止以保护远程修改: $file"
+                    ;;
+                esac
+              done <<< "$conflicts"
+              if [[ "$can_resolve" != true ]]; then
+                git rebase --abort
+                exit 1
+              fi
+              GIT_EDITOR=true git rebase --continue
+            fi
+
+            if git push origin HEAD:main; then
+              echo "[+] 订阅结果已同步并推送。"
+              exit 0
+            fi
+            echo "[!] 推送时远程再次更新，准备重试..."
+          done
+          echo "[!] 重试 3 次后仍无法推送订阅结果。" >&2
+          exit 1

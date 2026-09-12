@@ -130,9 +130,33 @@ def test_source_url_loader():
     print("  ✅ 空行、注释、去重、非法地址和失败策略通过")
 
 
+def test_export_format_counts():
+    print("阶段0.6: 三格式导出数量统计测试")
+    old_output = mv.OUTPUT_DIR
+    old_country = mv.COUNTRY_DIR
+    old_res_country = mv.RESIDENTIAL_COUNTRY_DIR
+    with tempfile.TemporaryDirectory() as tmp:
+        mv.OUTPUT_DIR = tmp
+        mv.COUNTRY_DIR = os.path.join(tmp, "by-country")
+        mv.RESIDENTIAL_COUNTRY_DIR = os.path.join(tmp, "residential-by-country")
+        base = {
+            "country": "US", "net_type": "datacenter", "confidence": 80,
+            "fraud_score": -1, "latency_ms": 10,
+        }
+        vless = dict(base, outbound={"type": "vless", "server": "v.example.com", "server_port": 443, "uuid": "00000000-0000-0000-0000-000000000001"})
+        http = dict(base, outbound={"type": "http", "server": "1.2.3.4", "server_port": 8080}, country="AR")
+        stats = mv.export_all([vless, http], [], [vless, http])
+        assert stats["all"] == {"v2ray": 1, "clash": 2, "singbox": 2}
+        assert stats["by_country"]["AR"] == {"v2ray": 0, "clash": 1, "singbox": 1}
+    mv.OUTPUT_DIR = old_output
+    mv.COUNTRY_DIR = old_country
+    mv.RESIDENTIAL_COUNTRY_DIR = old_res_country
+    print("  ✅ V2RayN、Clash、sing-box 数量和国家并集统计通过")
+
 def run_test():
     test_source_url_loader()
     test_proxy_loader()
+    test_export_format_counts()
     print("=" * 70)
     print("阶段1: 协议解析器单元测试 (17 个样本)")
     print("=" * 70)

@@ -2338,34 +2338,47 @@ def export_all(unique_nodes, residential, non_residential):
             sb_nodes.append(outbound_to_singbox(ob, name))
         return links, proxies, sb_nodes
 
+    def counts(group):
+        links, proxies, sb_nodes = group
+        return {"v2ray": len(links), "clash": len(proxies), "singbox": len(sb_nodes)}
+
     # 1) 全量
-    all_links, all_proxies, all_sb = build_group(unique_nodes)
+    all_group = build_group(unique_nodes)
+    all_links, all_proxies, all_sb = all_group
     with open(os.path.join(OUTPUT_DIR, "v2ray.txt"), "w", encoding="utf-8") as f:
         f.write(base64.b64encode("\n".join(all_links).encode()).decode())
     export_clash_yaml(all_proxies, os.path.join(OUTPUT_DIR, "clash.yaml"))
     export_singbox_json(all_sb, os.path.join(OUTPUT_DIR, "singbox.json"))
 
     # 2) 家宽总订阅
-    res_links, res_proxies, res_sb = build_group(residential, force_res=True)
+    res_group = build_group(residential, force_res=True)
+    res_links, res_proxies, res_sb = res_group
     with open(os.path.join(OUTPUT_DIR, "residential.txt"), "w", encoding="utf-8") as f:
         f.write(base64.b64encode("\n".join(res_links).encode()).decode())
     if res_proxies:
         export_clash_yaml(res_proxies, os.path.join(OUTPUT_DIR, "residential-clash.yaml"))
+    else:
+        p = os.path.join(OUTPUT_DIR, "residential-clash.yaml")
+        if os.path.exists(p):
+            os.remove(p)
+    if res_sb:
         export_singbox_json(res_sb, os.path.join(OUTPUT_DIR, "residential-singbox.json"))
     else:
-        for fn in ("residential-clash.yaml", "residential-singbox.json"):
-            p = os.path.join(OUTPUT_DIR, fn)
-            if os.path.exists(p):
-                os.remove(p)
+        p = os.path.join(OUTPUT_DIR, "residential-singbox.json")
+        if os.path.exists(p):
+            os.remove(p)
 
     # 3) 按国家 - 普通区
     shutil.rmtree(COUNTRY_DIR, ignore_errors=True)
     os.makedirs(COUNTRY_DIR, exist_ok=True)
     by_cc = {}
+    normal_counts = {}
     for n in non_residential:
         by_cc.setdefault(n["country"], []).append(n)
     for cc, lst in by_cc.items():
-        l, p, s = build_group(lst)
+        group = build_group(lst)
+        l, p, s = group
+        normal_counts[cc] = counts(group)
         with open(os.path.join(COUNTRY_DIR, f"{cc}.txt"), "w", encoding="utf-8") as f:
             f.write(base64.b64encode("\n".join(l).encode()).decode())
         export_clash_yaml(p, os.path.join(COUNTRY_DIR, f"clash-{cc}.yaml"))
@@ -2375,17 +2388,26 @@ def export_all(unique_nodes, residential, non_residential):
     shutil.rmtree(RESIDENTIAL_COUNTRY_DIR, ignore_errors=True)
     os.makedirs(RESIDENTIAL_COUNTRY_DIR, exist_ok=True)
     res_by_cc = {}
+    residential_counts = {}
     for n in residential:
         res_by_cc.setdefault(n["country"], []).append(n)
     for cc, lst in res_by_cc.items():
-        l, p, s = build_group(lst, force_res=True)
+        group = build_group(lst, force_res=True)
+        l, p, s = group
+        residential_counts[cc] = counts(group)
         with open(os.path.join(RESIDENTIAL_COUNTRY_DIR, f"{cc}.txt"), "w", encoding="utf-8") as f:
             f.write(base64.b64encode("\n".join(l).encode()).decode())
         export_clash_yaml(p, os.path.join(RESIDENTIAL_COUNTRY_DIR, f"clash-{cc}.yaml"))
         export_singbox_json(s, os.path.join(RESIDENTIAL_COUNTRY_DIR, f"singbox-{cc}.json"))
 
-    print(f"[*] 导出完毕: 全量 {len(all_links)} | 家宽 {len(res_links)}")
-    return len(all_links), len(res_links)
+    stats = {
+        "all": counts(all_group),
+        "residential": counts(res_group),
+        "by_country": normal_counts,
+        "residential_by_country": residential_counts,
+    }
+    print(f"[*] 导出完毕: 全量 {stats['all']} | 家宽 {stats['residential']}")
+    return stats
 
 
 def export_clash_yaml(clash_proxies, filepath):
@@ -2427,9 +2449,14 @@ def export_singbox_json(sb_nodes, filepath):
 # README 生成
 # ═══════════════════════════════════════════N═══════════════════════
 
-def update_readme(total_count, res_count):
+def update_readme(export_stats):
     repo_name = os.environ.get("GITHUB_REPOSITORY", "hezhanleiok/freesub").strip()
     cache_bust = int(time.time())
+    all_counts = export_stats["all"]
+    res_counts = export_stats["residential"]
+    normal_counts = export_stats["by_country"]
+    residential_country_counts = export_stats["residential_by_country"]
+
     # 私有化部署 Worker 脚本里的仓库参数 (默认值兜底)
     try:
         owner, repo = repo_name.split("/", 1)
@@ -2449,28 +2476,19 @@ def update_readme(total_count, res_count):
         except Exception:
             return 0
 
-    res_counts, normal_counts = {}, {}
-    for d, store in ((RESIDENTIAL_COUNTRY_DIR, res_counts), (COUNTRY_DIR, normal_counts)):
-        if os.path.exists(d):
-            for fn in os.listdir(d):
-                if fn.endswith(".txt"):
-                    cnt = count_file(os.path.join(d, fn))
-                    if cnt > 0:
-                        store[fn[:-4]] = cnt
-
     def table_rows(counts, sub):
         rows = []
-        for cc in sorted(counts, key=lambda x: counts[x], reverse=True):
+        for cc in sorted(counts, key=lambda x: sum(counts[x].values()), reverse=True):
             flag = get_country_flag(cc)
             name = COUNTRY_NAMES.get(cc, cc)
-            cnt = counts[cc]
+            item = counts[cc]
             v2 = f"[CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/{sub}/{cc}.txt?v={cache_bust}) · [Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/{sub}/{cc}.txt)"
             cl = f"[CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/{sub}/clash-{cc}.yaml?v={cache_bust}) · [Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/{sub}/clash-{cc}.yaml)"
             sb = f"[CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/{sub}/singbox-{cc}.json?v={cache_bust}) · [Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/{sub}/singbox-{cc}.json)"
-            rows.append(f"| {flag} {name} | {cnt} | {v2} | {cl} | {sb} |")
-        return "\n".join(rows) if rows else "| 暂无可用节点 | 0 | - | - | - |"
+            rows.append(f"| {flag} {name} | {item['v2ray']} | {item['clash']} | {item['singbox']} | {v2} | {cl} | {sb} |")
+        return "\n".join(rows) if rows else "| 暂无可用节点 | 0 | 0 | 0 | - | - | - |"
 
-    res_table = table_rows(res_counts, "residential-by-country")
+    res_table = table_rows(residential_country_counts, "residential-by-country")
     normal_table = table_rows(normal_counts, "by-country")
 
     readme = f"""# 🚀 免费节点自动测活订阅池 (含真实家宽/住宅IP甄选)
@@ -2485,9 +2503,9 @@ def update_readme(total_count, res_count):
 
 | 客户端 / 格式类型 | 节点总数 | 免翻 CDN 订阅直链 (国内直连) | 官方原生 Raw 直链 (开启代理) |
 | :--- | :---: | :--- | :--- |
-| 🚀 **Clash (YAML 格式)** | `{total_count}` | [免翻 CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/clash.yaml?v={cache_bust}) | [官方 Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/clash.yaml) |
-| ⚡ **V2RayN (Base64 格式)** | `{total_count}` | [免翻 CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/v2ray.txt?v={cache_bust}) | [官方 Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/v2ray.txt) |
-| 📦 **sing-box (JSON 格式)** | `{total_count}` | [免翻 CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/singbox.json?v={cache_bust}) | [官方 Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/singbox.json) |
+| 🚀 **Clash (YAML 格式)** | `{all_counts['clash']}` | [免翻 CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/clash.yaml?v={cache_bust}) | [官方 Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/clash.yaml) |
+| ⚡ **V2RayN (Base64 格式)** | `{all_counts['v2ray']}` | [免翻 CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/v2ray.txt?v={cache_bust}) | [官方 Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/v2ray.txt) |
+| 📦 **sing-box (JSON 格式)** | `{all_counts['singbox']}` | [免翻 CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/singbox.json?v={cache_bust}) | [官方 Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/singbox.json) |
 
 ---
 
@@ -2495,16 +2513,26 @@ def update_readme(total_count, res_count):
 
 > 家宽判定六重信号: ① ip-api.com `hosting` 字段 ② `mobile` 移动网络字段 ③ Cloudflare/主流 CDN Anycast 网段比对 ④ MaxMind GeoLite2 ASN 白/黑名单 (覆盖 60+ 国家主流民用运营商) ⑤ rDNS/ISP 名称特征 ⑥ Scamalytics 风控评分复核 (fraud ≥75 降级、≥90 剔除)。排除所有云主机/数据中心/CDN 任播, 保留真实民用宽带与移动网络。
 
-| 家宽地区 | 节点数 | V2RayN 专属订阅 | Clash 专属订阅 | sing-box 专属订阅 |
-| :--- | :---: | :---: | :---: | :---: |
+### 所有家宽总订阅
+
+| 客户端 / 格式类型 | 节点数 | 免翻 CDN 订阅直链 | 官方原生 Raw 直链 |
+| :--- | :---: | :--- | :--- |
+| 🚀 **Clash (YAML 格式)** | `{res_counts['clash']}` | [CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/residential-clash.yaml?v={cache_bust}) | [Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/residential-clash.yaml) |
+| ⚡ **V2RayN (Base64 格式)** | `{res_counts['v2ray']}` | [CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/residential.txt?v={cache_bust}) | [Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/residential.txt) |
+| 📦 **sing-box (JSON 格式)** | `{res_counts['singbox']}` | [CDN 直链](https://cdn.jsdelivr.net/gh/{repo_name}@main/output/residential-singbox.json?v={cache_bust}) | [Raw 直链](https://raw.githubusercontent.com/{repo_name}/main/output/residential-singbox.json) |
+
+> HTTP/SOCKS 代理可以进入 Clash 和 sing-box，但没有对应的 V2RayN URI，因此三种格式数量可能不同。
+
+| 家宽地区 | V2RayN 数量 | Clash 数量 | sing-box 数量 | V2RayN 专属订阅 | Clash 专属订阅 | sing-box 专属订阅 |
+| :--- | :---: | :---: | :---: | :--- | :--- | :--- |
 {res_table}
 
 ---
 
 ## 🗺️ 按照国家分类节点订阅 (非家宽/数据中心节点)
 
-| 地区/国家 | 节点数 | V2RayN 专属订阅 | Clash 专属订阅 | sing-box 专属订阅 |
-| :--- | :---: | :---: | :---: | :---: |
+| 地区/国家 | V2RayN 数量 | Clash 数量 | sing-box 数量 | V2RayN 专属订阅 | Clash 专属订阅 | sing-box 专属订阅 |
+| :--- | :---: | :---: | :---: | :--- | :--- | :--- |
 {normal_table}
 
 ---
@@ -2558,7 +2586,9 @@ export default {{
 部署后 Worker 会分配一个专属域名（例如 `my-sub.yourname.workers.dev`），你的客户端可以直接无感订阅：
 * **总 V2RayN 订阅**: `https://你的域名.workers.dev/v2ray.txt`
 * **总 Clash 订阅**: `https://你的域名.workers.dev/clash.yaml`
-* **总 sing-box 订阅**: `https://你的域名.workers.dev/singbox.json`
+* **所有家宽 V2RayN**: `https://你的域名.workers.dev/residential.txt`
+* **所有家宽 Clash**: `https://你的域名.workers.dev/residential-clash.yaml`
+* **所有家宽 sing-box**: `https://你的域名.workers.dev/residential-singbox.json`
 * **台湾家宽 V2RayN**: `https://你的域名.workers.dev/residential-by-country/TW.txt`
 * **香港家宽 Clash**: `https://你的域名.workers.dev/residential-by-country/clash-HK.yaml`
 * **日本家宽 sing-box**: `https://你的域名.workers.dev/residential-by-country/singbox-JP.json`
@@ -2578,7 +2608,7 @@ export default {{
 """
     with open(os.path.join(BASEDIR, "README.md"), "w", encoding="utf-8") as f:
         f.write(readme)
-    print(f"[+] README.md 更新完毕: 总节点 {total_count}, 家宽 {res_count}")
+    print(f"[+] README.md 更新完毕: 总节点 {all_counts}, 家宽 {res_counts}")
 
 
 # ═══════════════════════════════════════════N═══════════════════════
@@ -2702,14 +2732,14 @@ def main():
     if not unique_nodes:
         print("[!] 分类后无存活节点 — 保留上次 output")
         return
-    total, res = export_all(unique_nodes, residential, non_residential)
+    export_stats = export_all(unique_nodes, residential, non_residential)
     try:
         checkpoint = os.path.join(OUTPUT_DIR, ".liveness_results.json")
         if os.path.exists(checkpoint):
             os.remove(checkpoint)
     except OSError as exc:
         print(f"[!] 测活中间结果清理失败（不影响已生成订阅）→ {exc}")
-    update_readme(total, res)
+    update_readme(export_stats)
 
     # 统计报告
     elapsed = time.time() - t_start

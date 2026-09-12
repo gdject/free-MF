@@ -14,15 +14,15 @@ proxies:
   servername: neth9.lunariai.ru
   skip-cert-verify: true
 - name: 🇧🇬 保加利亚 (Bulgaria) 02 - xiaohe
-  server: 213.149.156.87
-  port: 5678
-  udp: false
-  type: socks4
-- name: 🇧🇬 保加利亚 (Bulgaria) 03 - xiaohe
   server: 31.211.142.115
   port: 8192
   udp: false
   type: socks5
+- name: 🇧🇬 保加利亚 (Bulgaria) 03 - xiaohe
+  server: 212.5.132.74
+  port: 5678
+  udp: false
+  type: socks4
 proxy-groups:
 - name: PROXIES
   type: select

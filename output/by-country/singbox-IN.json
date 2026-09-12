@@ -6,38 +6,6 @@
     {
       "type": "vless",
       "tag": "🇮🇳 印度 (India) 01 - xiaohe",
-      "server": "194.61.31.126",
-      "server_port": 2053,
-      "uuid": "1d4e18bd-1f26-4915-b35a-7ace4826e76a",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.apple.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU",
-          "short_id": "9980e0609b0d3891"
-        }
-      }
-    },
-    {
-      "type": "http",
-      "tag": "🇮🇳 印度 (India) 02 - xiaohe",
-      "server": "45.194.41.231",
-      "server_port": 8080
-    },
-    {
-      "type": "http",
-      "tag": "🇮🇳 印度 (India) 03 - xiaohe",
-      "server": "45.194.41.43",
-      "server_port": 8080
-    },
-    {
-      "type": "vless",
-      "tag": "🇮🇳 印度 (India) 04 - xiaohe",
       "server": "148.113.5.44",
       "server_port": 443,
       "uuid": "72ea5a91-ffcc-43d2-9297-5993c3abf186",
@@ -57,93 +25,130 @@
       }
     },
     {
-      "type": "hysteria2",
+      "type": "vless",
+      "tag": "🇮🇳 印度 (India) 02 - xiaohe",
+      "server": "194.61.31.126",
+      "server_port": 2053,
+      "uuid": "1d4e18bd-1f26-4915-b35a-7ace4826e76a",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.apple.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "PuAGLfJy6cu1TNoHuKIKSxPetCbZI41fc8hQDjWPIAU",
+          "short_id": "9980e0609b0d3891"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇳 印度 (India) 03 - xiaohe",
+      "server": "45.194.41.70",
+      "server_port": 8080
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇳 印度 (India) 04 - xiaohe",
+      "server": "45.194.41.231",
+      "server_port": 8080
+    },
+    {
+      "type": "http",
       "tag": "🇮🇳 印度 (India) 05 - xiaohe",
+      "server": "203.200.155.180",
+      "server_port": 3128
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇳 印度 (India) 06 - xiaohe",
+      "server": "45.194.41.141",
+      "server_port": 8080
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🇮🇳 印度 (India) 07 - xiaohe",
       "server": "vpn-in-001.fastervpn.world",
       "server_port": 443,
       "password": "H7mP2xY9kJ4nQ8wR5tF6vB3z",
       "tls": {
         "enabled": true,
-        "server_name": "127.0.0.1",
+        "server_name": "vpn-in-001.fastervpn.world",
         "insecure": true
       }
     },
     {
       "type": "socks",
-      "tag": "🇮🇳 印度 (India) 06 - xiaohe",
+      "tag": "🇮🇳 印度 (India) 08 - xiaohe",
       "server": "144.24.111.128",
       "server_port": 1088,
       "version": "5"
     },
     {
       "type": "http",
-      "tag": "🇮🇳 印度 (India) 07 - xiaohe",
-      "server": "94.136.185.35",
-      "server_port": 30829
-    },
-    {
-      "type": "http",
-      "tag": "🇮🇳 印度 (India) 08 - xiaohe",
-      "server": "45.194.41.70",
-      "server_port": 8080
-    },
-    {
-      "type": "http",
       "tag": "🇮🇳 印度 (India) 09 - xiaohe",
-      "server": "45.194.41.141",
-      "server_port": 8080
+      "server": "142.93.216.52",
+      "server_port": 3129
     },
     {
       "type": "http",
       "tag": "🇮🇳 印度 (India) 10 - xiaohe",
-      "server": "3.6.110.80",
+      "server": "45.194.41.103",
+      "server_port": 8080
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇳 印度 (India) 11 - xiaohe",
+      "server": "45.194.41.43",
+      "server_port": 8080
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇳 印度 (India) 12 - xiaohe",
+      "server": "45.194.41.155",
       "server_port": 8080
     },
     {
       "type": "socks",
-      "tag": "🇮🇳 印度 (India) 11 - xiaohe",
-      "server": "45.74.31.42",
-      "server_port": 13668,
-      "version": "5"
-    },
-    {
-      "type": "vmess",
-      "tag": "🇮🇳 印度 (India) 12 - xiaohe",
-      "server": "152.67.8.205",
-      "server_port": 80,
-      "uuid": "9db4c708-aef8-4359-821b-38e47990be0d",
-      "security": "auto",
-      "transport": {
-        "type": "ws",
-        "path": "/"
-      }
-    },
-    {
-      "type": "socks",
       "tag": "🇮🇳 印度 (India) 13 - xiaohe",
-      "server": "103.53.110.45",
-      "server_port": 10801,
-      "version": "4"
-    },
-    {
-      "type": "socks",
-      "tag": "🇮🇳 印度 (India) 14 - xiaohe",
-      "server": "150.129.170.65",
+      "server": "111.90.169.178",
       "server_port": 5678,
       "version": "4"
     },
     {
       "type": "socks",
+      "tag": "🇮🇳 印度 (India) 14 - xiaohe",
+      "server": "27.116.53.9",
+      "server_port": 5678,
+      "version": "4"
+    },
+    {
+      "type": "http",
       "tag": "🇮🇳 印度 (India) 15 - xiaohe",
-      "server": "45.74.31.30",
-      "server_port": 37509,
-      "version": "5"
+      "server": "103.66.12.225",
+      "server_port": 8080
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇳 印度 (India) 16 - xiaohe",
+      "server": "3.6.110.80",
+      "server_port": 8080
     },
     {
       "type": "socks",
-      "tag": "🇮🇳 印度 (India) 16 - xiaohe",
-      "server": "202.179.88.233",
-      "server_port": 51951,
+      "tag": "🇮🇳 印度 (India) 17 - xiaohe",
+      "server": "119.235.50.78",
+      "server_port": 4153,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇮🇳 印度 (India) 18 - xiaohe",
+      "server": "103.66.74.61",
+      "server_port": 1080,
       "version": "4"
     },
     {
@@ -166,7 +171,9 @@
         "🇮🇳 印度 (India) 13 - xiaohe",
         "🇮🇳 印度 (India) 14 - xiaohe",
         "🇮🇳 印度 (India) 15 - xiaohe",
-        "🇮🇳 印度 (India) 16 - xiaohe"
+        "🇮🇳 印度 (India) 16 - xiaohe",
+        "🇮🇳 印度 (India) 17 - xiaohe",
+        "🇮🇳 印度 (India) 18 - xiaohe"
       ]
     },
     {
@@ -188,7 +195,9 @@
         "🇮🇳 印度 (India) 13 - xiaohe",
         "🇮🇳 印度 (India) 14 - xiaohe",
         "🇮🇳 印度 (India) 15 - xiaohe",
-        "🇮🇳 印度 (India) 16 - xiaohe"
+        "🇮🇳 印度 (India) 16 - xiaohe",
+        "🇮🇳 印度 (India) 17 - xiaohe",
+        "🇮🇳 印度 (India) 18 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

@@ -13,8 +13,8 @@
     {
       "type": "http",
       "tag": "🇨🇿 捷克 (Czech) 02 - xiaohe",
-      "server": "185.248.179.99",
-      "server_port": 8080
+      "server": "185.205.210.154",
+      "server_port": 8102
     },
     {
       "type": "selector",

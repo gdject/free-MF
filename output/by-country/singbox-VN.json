@@ -6,50 +6,22 @@
     {
       "type": "http",
       "tag": "🇻🇳 越南 (Vietnam) 01 - xiaohe",
-      "server": "14.251.13.20",
-      "server_port": 8080
+      "server": "163.181.207.167",
+      "server_port": 9999
     },
     {
       "type": "socks",
       "tag": "🇻🇳 越南 (Vietnam) 02 - xiaohe",
-      "server": "103.221.228.50",
-      "server_port": 5678,
+      "server": "113.161.134.128",
+      "server_port": 1080,
       "version": "4"
     },
     {
       "type": "socks",
       "tag": "🇻🇳 越南 (Vietnam) 03 - xiaohe",
-      "server": "160.22.17.4",
-      "server_port": 9988,
-      "version": "5"
-    },
-    {
-      "type": "socks",
-      "tag": "🇻🇳 越南 (Vietnam) 04 - xiaohe",
-      "server": "113.176.118.150",
+      "server": "113.160.188.21",
       "server_port": 1080,
       "version": "5"
-    },
-    {
-      "type": "socks",
-      "tag": "🇻🇳 越南 (Vietnam) 05 - xiaohe",
-      "server": "45.74.31.30",
-      "server_port": 10108,
-      "version": "5"
-    },
-    {
-      "type": "socks",
-      "tag": "🇻🇳 越南 (Vietnam) 06 - xiaohe",
-      "server": "14.232.166.150",
-      "server_port": 5678,
-      "version": "4"
-    },
-    {
-      "type": "socks",
-      "tag": "🇻🇳 越南 (Vietnam) 07 - xiaohe",
-      "server": "113.161.134.128",
-      "server_port": 1080,
-      "version": "4"
     },
     {
       "type": "selector",
@@ -58,11 +30,7 @@
         "auto",
         "🇻🇳 越南 (Vietnam) 01 - xiaohe",
         "🇻🇳 越南 (Vietnam) 02 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 03 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 04 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 05 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 06 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 07 - xiaohe"
+        "🇻🇳 越南 (Vietnam) 03 - xiaohe"
       ]
     },
     {
@@ -71,11 +39,7 @@
       "outbounds": [
         "🇻🇳 越南 (Vietnam) 01 - xiaohe",
         "🇻🇳 越南 (Vietnam) 02 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 03 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 04 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 05 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 06 - xiaohe",
-        "🇻🇳 越南 (Vietnam) 07 - xiaohe"
+        "🇻🇳 越南 (Vietnam) 03 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

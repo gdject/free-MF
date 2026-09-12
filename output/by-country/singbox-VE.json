@@ -6,55 +6,61 @@
     {
       "type": "http",
       "tag": "🇻🇪 VE 01 - xiaohe",
-      "server": "190.97.236.128",
+      "server": "190.97.236.129",
       "server_port": 999
     },
     {
       "type": "http",
       "tag": "🇻🇪 VE 02 - xiaohe",
-      "server": "154.3.76.14",
-      "server_port": 999
-    },
-    {
-      "type": "http",
-      "tag": "🇻🇪 VE 03 - xiaohe",
-      "server": "200.90.52.154",
-      "server_port": 999
-    },
-    {
-      "type": "http",
-      "tag": "🇻🇪 VE 04 - xiaohe",
-      "server": "38.172.184.150",
-      "server_port": 999
-    },
-    {
-      "type": "http",
-      "tag": "🇻🇪 VE 05 - xiaohe",
-      "server": "190.97.241.106",
-      "server_port": 999
-    },
-    {
-      "type": "http",
-      "tag": "🇻🇪 VE 06 - xiaohe",
-      "server": "201.71.2.27",
-      "server_port": 999
-    },
-    {
-      "type": "http",
-      "tag": "🇻🇪 VE 07 - xiaohe",
       "server": "38.51.207.104",
       "server_port": 8080
     },
     {
       "type": "http",
+      "tag": "🇻🇪 VE 03 - xiaohe",
+      "server": "154.62.127.164",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇻🇪 VE 04 - xiaohe",
+      "server": "201.71.2.25",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇻🇪 VE 05 - xiaohe",
+      "server": "154.59.56.72",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇻🇪 VE 06 - xiaohe",
+      "server": "154.62.127.125",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇻🇪 VE 07 - xiaohe",
+      "server": "190.94.199.241",
+      "server_port": 999
+    },
+    {
+      "type": "http",
       "tag": "🇻🇪 VE 08 - xiaohe",
-      "server": "38.172.170.193",
+      "server": "38.172.170.92",
       "server_port": 999
     },
     {
       "type": "http",
       "tag": "🇻🇪 VE 09 - xiaohe",
-      "server": "154.59.56.72",
+      "server": "190.97.241.106",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇻🇪 VE 10 - xiaohe",
+      "server": "200.90.52.154",
       "server_port": 999
     },
     {
@@ -70,7 +76,8 @@
         "🇻🇪 VE 06 - xiaohe",
         "🇻🇪 VE 07 - xiaohe",
         "🇻🇪 VE 08 - xiaohe",
-        "🇻🇪 VE 09 - xiaohe"
+        "🇻🇪 VE 09 - xiaohe",
+        "🇻🇪 VE 10 - xiaohe"
       ]
     },
     {
@@ -85,7 +92,8 @@
         "🇻🇪 VE 06 - xiaohe",
         "🇻🇪 VE 07 - xiaohe",
         "🇻🇪 VE 08 - xiaohe",
-        "🇻🇪 VE 09 - xiaohe"
+        "🇻🇪 VE 09 - xiaohe",
+        "🇻🇪 VE 10 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

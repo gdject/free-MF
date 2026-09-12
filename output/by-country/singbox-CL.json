@@ -6,7 +6,19 @@
     {
       "type": "http",
       "tag": "🇨🇱 智利 (Chile) 01 - xiaohe",
-      "server": "45.180.26.1",
+      "server": "151.241.86.129",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇨🇱 智利 (Chile) 02 - xiaohe",
+      "server": "200.39.137.34",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇨🇱 智利 (Chile) 03 - xiaohe",
+      "server": "38.225.117.1",
       "server_port": 999
     },
     {
@@ -14,14 +26,18 @@
       "tag": "select",
       "outbounds": [
         "auto",
-        "🇨🇱 智利 (Chile) 01 - xiaohe"
+        "🇨🇱 智利 (Chile) 01 - xiaohe",
+        "🇨🇱 智利 (Chile) 02 - xiaohe",
+        "🇨🇱 智利 (Chile) 03 - xiaohe"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "🇨🇱 智利 (Chile) 01 - xiaohe"
+        "🇨🇱 智利 (Chile) 01 - xiaohe",
+        "🇨🇱 智利 (Chile) 02 - xiaohe",
+        "🇨🇱 智利 (Chile) 03 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

@@ -11,36 +11,18 @@
       "version": "4"
     },
     {
-      "type": "socks",
-      "tag": "🇳🇬 尼日利亚 (Nigeria) 02 - xiaohe",
-      "server": "154.113.170.145",
-      "server_port": 5678,
-      "version": "4"
-    },
-    {
-      "type": "socks",
-      "tag": "🇳🇬 尼日利亚 (Nigeria) 03 - xiaohe",
-      "server": "105.235.201.234",
-      "server_port": 32639,
-      "version": "4"
-    },
-    {
       "type": "selector",
       "tag": "select",
       "outbounds": [
         "auto",
-        "🇳🇬 尼日利亚 (Nigeria) 01 - xiaohe",
-        "🇳🇬 尼日利亚 (Nigeria) 02 - xiaohe",
-        "🇳🇬 尼日利亚 (Nigeria) 03 - xiaohe"
+        "🇳🇬 尼日利亚 (Nigeria) 01 - xiaohe"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "🇳🇬 尼日利亚 (Nigeria) 01 - xiaohe",
-        "🇳🇬 尼日利亚 (Nigeria) 02 - xiaohe",
-        "🇳🇬 尼日利亚 (Nigeria) 03 - xiaohe"
+        "🇳🇬 尼日利亚 (Nigeria) 01 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

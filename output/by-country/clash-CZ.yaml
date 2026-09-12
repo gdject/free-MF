@@ -10,8 +10,8 @@ proxies:
   udp: false
   type: socks5
 - name: 🇨🇿 捷克 (Czech) 02 - xiaohe
-  server: 185.248.179.99
-  port: 8080
+  server: 185.205.210.154
+  port: 8102
   udp: false
   type: http
 proxy-groups:

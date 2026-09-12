@@ -6,14 +6,6 @@
     {
       "type": "shadowsocks",
       "tag": "🇪🇸 西班牙 (Spain) 01 - xiaohe",
-      "server": "64.177.32.29",
-      "server_port": 8388,
-      "method": "aes-256-gcm",
-      "password": "wBYiDjDDyFqcBnNl"
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇪🇸 西班牙 (Spain) 02 - xiaohe",
       "server": "140.174.184.5",
       "server_port": 8388,
       "method": "chacha20-ietf-poly1305",
@@ -21,7 +13,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇸 西班牙 (Spain) 03 - xiaohe",
+      "tag": "🇪🇸 西班牙 (Spain) 02 - xiaohe",
       "server": "185.254.205.79",
       "server_port": 19842,
       "uuid": "43c23116-1115-4af4-a0f0-56f02841a605",
@@ -31,12 +23,32 @@
         "server_name": "www.tesla.com",
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "chrome"
         },
         "reality": {
           "enabled": true,
           "public_key": "sfOfuQeJBlKfDnPL_EMWUxMIiFAN8BNKjtWDUvlsjzM",
           "short_id": "25ebc9e0a912"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇸 西班牙 (Spain) 03 - xiaohe",
+      "server": "212.227.235.66",
+      "server_port": 2053,
+      "uuid": "ead0dd61-d398-40ad-80d6-a0e1e516d7d3",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.apple.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "7Y6Xb5Ql_03K25x8yKUSOKI2JTOMyv2nyCcFza90uxk",
+          "short_id": "29e8dcd2b37aaa7f"
         }
       }
     },
@@ -51,16 +63,22 @@
     {
       "type": "socks",
       "tag": "🇪🇸 西班牙 (Spain) 05 - xiaohe",
-      "server": "85.117.248.36",
-      "server_port": 1080,
+      "server": "161.35.90.93",
+      "server_port": 1083,
       "version": "5"
     },
     {
       "type": "socks",
       "tag": "🇪🇸 西班牙 (Spain) 06 - xiaohe",
-      "server": "81.0.49.104",
-      "server_port": 18500,
+      "server": "45.74.31.30",
+      "server_port": 9306,
       "version": "5"
+    },
+    {
+      "type": "http",
+      "tag": "🇪🇸 西班牙 (Spain) 07 - xiaohe",
+      "server": "185.174.80.7",
+      "server_port": 3128
     },
     {
       "type": "selector",
@@ -72,7 +90,8 @@
         "🇪🇸 西班牙 (Spain) 03 - xiaohe",
         "🇪🇸 西班牙 (Spain) 04 - xiaohe",
         "🇪🇸 西班牙 (Spain) 05 - xiaohe",
-        "🇪🇸 西班牙 (Spain) 06 - xiaohe"
+        "🇪🇸 西班牙 (Spain) 06 - xiaohe",
+        "🇪🇸 西班牙 (Spain) 07 - xiaohe"
       ]
     },
     {
@@ -84,7 +103,8 @@
         "🇪🇸 西班牙 (Spain) 03 - xiaohe",
         "🇪🇸 西班牙 (Spain) 04 - xiaohe",
         "🇪🇸 西班牙 (Spain) 05 - xiaohe",
-        "🇪🇸 西班牙 (Spain) 06 - xiaohe"
+        "🇪🇸 西班牙 (Spain) 06 - xiaohe",
+        "🇪🇸 西班牙 (Spain) 07 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

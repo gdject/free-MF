@@ -5,10 +5,10 @@ mode: rule
 log-level: info
 proxies:
 - name: 🇨🇾 塞浦路斯 (Cyprus) 01 (家宽) - xiaohe
-  server: 5.75.133.113
-  port: 10809
+  server: 87.228.228.101
+  port: 4145
   udp: false
-  type: socks5
+  type: socks4
 proxy-groups:
 - name: PROXIES
   type: select

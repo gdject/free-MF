@@ -1,0 +1,32 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇨🇳 CN 01 (移动家宽) - xiaohe
+  server: 120.232.115.170
+  port: 17981
+  udp: false
+  type: http
+- name: 🇨🇳 CN 02 (移动家宽) - xiaohe
+  server: 117.88.244.241
+  port: 54919
+  udp: false
+  type: socks5
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇨🇳 CN 01 (移动家宽) - xiaohe
+  - 🇨🇳 CN 02 (移动家宽) - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇨🇳 CN 01 (移动家宽) - xiaohe
+  - 🇨🇳 CN 02 (移动家宽) - xiaohe
+rules:
+- MATCH,PROXIES

@@ -11,18 +11,26 @@
       "version": "4"
     },
     {
+      "type": "http",
+      "tag": "🇵🇾 PY 02 - xiaohe",
+      "server": "181.40.18.42",
+      "server_port": 999
+    },
+    {
       "type": "selector",
       "tag": "select",
       "outbounds": [
         "auto",
-        "🇵🇾 PY 01 - xiaohe"
+        "🇵🇾 PY 01 - xiaohe",
+        "🇵🇾 PY 02 - xiaohe"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "🇵🇾 PY 01 - xiaohe"
+        "🇵🇾 PY 01 - xiaohe",
+        "🇵🇾 PY 02 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

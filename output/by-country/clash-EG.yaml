@@ -5,8 +5,8 @@ mode: rule
 log-level: info
 proxies:
 - name: 🇪🇬 埃及 (Egypt) 01 - xiaohe
-  server: 41.33.60.42
-  port: 8081
+  server: 156.200.116.78
+  port: 8080
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 02 - xiaohe
@@ -15,32 +15,32 @@ proxies:
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 03 - xiaohe
-  server: 41.33.245.139
+  server: 41.196.16.228
   port: 1981
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 04 - xiaohe
-  server: 197.164.101.14
-  port: 1976
+  server: 196.204.3.21
+  port: 1981
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 05 - xiaohe
-  server: 41.196.16.228
-  port: 1976
+  server: 197.164.101.14
+  port: 1981
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 06 - xiaohe
-  server: 41.196.16.228
-  port: 1981
+  server: 41.33.60.42
+  port: 8081
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 07 - xiaohe
-  server: 41.33.219.140
-  port: 1981
+  server: 41.128.72.197
+  port: 1976
   udp: false
   type: http
 - name: 🇪🇬 埃及 (Egypt) 08 - xiaohe
-  server: 41.33.219.140
+  server: 41.196.16.228
   port: 1976
   udp: false
   type: http

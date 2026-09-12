@@ -12,27 +12,18 @@
       "password": "Y6R9pAtvxxzmGC"
     },
     {
-      "type": "socks",
-      "tag": "🇩🇰 丹麦 (Denmark) 02 - xiaohe",
-      "server": "93.167.245.6",
-      "server_port": 4145,
-      "version": "4"
-    },
-    {
       "type": "selector",
       "tag": "select",
       "outbounds": [
         "auto",
-        "🇩🇰 丹麦 (Denmark) 01 - xiaohe",
-        "🇩🇰 丹麦 (Denmark) 02 - xiaohe"
+        "🇩🇰 丹麦 (Denmark) 01 - xiaohe"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "🇩🇰 丹麦 (Denmark) 01 - xiaohe",
-        "🇩🇰 丹麦 (Denmark) 02 - xiaohe"
+        "🇩🇰 丹麦 (Denmark) 01 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

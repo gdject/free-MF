@@ -31,8 +31,15 @@
     {
       "type": "socks",
       "tag": "🇦🇹 奥地利 (Austria) 03 - xiaohe",
-      "server": "185.196.178.238",
-      "server_port": 60606,
+      "server": "83.218.186.22",
+      "server_port": 5678,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇦🇹 奥地利 (Austria) 04 - xiaohe",
+      "server": "178.189.56.158",
+      "server_port": 4153,
       "version": "4"
     },
     {
@@ -42,7 +49,8 @@
         "auto",
         "🇦🇹 奥地利 (Austria) 01 - xiaohe",
         "🇦🇹 奥地利 (Austria) 02 - xiaohe",
-        "🇦🇹 奥地利 (Austria) 03 - xiaohe"
+        "🇦🇹 奥地利 (Austria) 03 - xiaohe",
+        "🇦🇹 奥地利 (Austria) 04 - xiaohe"
       ]
     },
     {
@@ -51,7 +59,8 @@
       "outbounds": [
         "🇦🇹 奥地利 (Austria) 01 - xiaohe",
         "🇦🇹 奥地利 (Austria) 02 - xiaohe",
-        "🇦🇹 奥地利 (Austria) 03 - xiaohe"
+        "🇦🇹 奥地利 (Austria) 03 - xiaohe",
+        "🇦🇹 奥地利 (Austria) 04 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

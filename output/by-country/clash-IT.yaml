@@ -5,37 +5,35 @@ mode: rule
 log-level: info
 proxies:
 - name: 🇮🇹 意大利 (Italy) 01 - xiaohe
-  server: 185.164.175.81
-  port: 19999
-  udp: true
-  type: ss
-  cipher: aes-256-gcm
-  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
-- name: 🇮🇹 意大利 (Italy) 02 - xiaohe
   server: 57.131.48.45
   port: 8388
   udp: true
   type: ss
   cipher: aes-256-gcm
   password: itzvpn@321
-- name: 🇮🇹 意大利 (Italy) 03 - xiaohe
+- name: 🇮🇹 意大利 (Italy) 02 - xiaohe
   server: 15.160.160.206
   port: 3128
   udp: false
   type: http
+- name: 🇮🇹 意大利 (Italy) 03 - xiaohe
+  server: 185.164.175.81
+  port: 19999
+  udp: true
+  type: ss
+  cipher: aes-256-gcm
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
 - name: 🇮🇹 意大利 (Italy) 04 - xiaohe
-  server: 172.238.232.239
-  port: 32833
+  server: 57.131.32.191
+  port: 80
   udp: true
   type: vless
-  uuid: 167ed405-7de9-4bff-b1ea-6e3d49c76b0b
-  flow: xtls-rprx-vision
-  tls: true
-  reality-opts:
-    public-key: PaTDdYBrlh1xBixdI0igvRRkf0vnUwMRzi-4oDyfS20
-    short-id: a0a305ccc8e94aa8
-  servername: www.intel.com
-  client-fingerprint: chrome
+  uuid: 1e280316-0408-47c4-b058-05b8f1f17f02
+  network: ws
+  ws-opts:
+    path: /vless/
+    headers:
+      Host: ov-italy1.09vpn.com
 proxy-groups:
 - name: PROXIES
   type: select

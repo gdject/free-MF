@@ -9,31 +9,17 @@ proxies:
   port: 1080
   udp: false
   type: socks4
-- name: 🇦🇷 阿根廷 (Argentina) 02 (家宽) - xiaohe
-  server: 190.122.144.23
-  port: 5678
-  udp: false
-  type: socks4
-- name: 🇦🇷 阿根廷 (Argentina) 03 (家宽) - xiaohe
-  server: 181.168.162.63
-  port: 8080
-  udp: false
-  type: http
 proxy-groups:
 - name: PROXIES
   type: select
   proxies:
   - AUTO
   - 🇦🇷 阿根廷 (Argentina) 01 (家宽) - xiaohe
-  - 🇦🇷 阿根廷 (Argentina) 02 (家宽) - xiaohe
-  - 🇦🇷 阿根廷 (Argentina) 03 (家宽) - xiaohe
 - name: AUTO
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   proxies:
   - 🇦🇷 阿根廷 (Argentina) 01 (家宽) - xiaohe
-  - 🇦🇷 阿根廷 (Argentina) 02 (家宽) - xiaohe
-  - 🇦🇷 阿根廷 (Argentina) 03 (家宽) - xiaohe
 rules:
 - MATCH,PROXIES

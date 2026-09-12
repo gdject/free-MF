@@ -6,8 +6,8 @@
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 01 - xiaohe",
-      "server": "41.33.60.42",
-      "server_port": 8081
+      "server": "156.200.116.78",
+      "server_port": 8080
     },
     {
       "type": "http",
@@ -18,37 +18,37 @@
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 03 - xiaohe",
-      "server": "41.33.245.139",
+      "server": "41.196.16.228",
       "server_port": 1981
     },
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 04 - xiaohe",
-      "server": "197.164.101.14",
-      "server_port": 1976
+      "server": "196.204.3.21",
+      "server_port": 1981
     },
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 05 - xiaohe",
-      "server": "41.196.16.228",
-      "server_port": 1976
+      "server": "197.164.101.14",
+      "server_port": 1981
     },
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 06 - xiaohe",
-      "server": "41.196.16.228",
-      "server_port": 1981
+      "server": "41.33.60.42",
+      "server_port": 8081
     },
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 07 - xiaohe",
-      "server": "41.33.219.140",
-      "server_port": 1981
+      "server": "41.128.72.197",
+      "server_port": 1976
     },
     {
       "type": "http",
       "tag": "🇪🇬 埃及 (Egypt) 08 - xiaohe",
-      "server": "41.33.219.140",
+      "server": "41.196.16.228",
       "server_port": 1976
     },
     {

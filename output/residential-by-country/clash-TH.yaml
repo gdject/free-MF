@@ -5,13 +5,23 @@ mode: rule
 log-level: info
 proxies:
 - name: 🇹🇭 泰国 (Thailand) 01 (家宽) - xiaohe
-  server: 180.183.149.236
-  port: 5678
+  server: 125.24.145.164
+  port: 8080
+  udp: false
+  type: http
+- name: 🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe
+  server: 183.89.250.246
+  port: 1080
   udp: false
   type: socks4
-- name: 🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe
-  server: 1.179.172.45
-  port: 31225
+- name: 🇹🇭 泰国 (Thailand) 03 (家宽) - xiaohe
+  server: 49.48.64.187
+  port: 8080
+  udp: false
+  type: http
+- name: 🇹🇭 泰国 (Thailand) 04 (家宽) - xiaohe
+  server: 125.25.82.207
+  port: 5678
   udp: false
   type: socks4
 proxy-groups:
@@ -21,6 +31,8 @@ proxy-groups:
   - AUTO
   - 🇹🇭 泰国 (Thailand) 01 (家宽) - xiaohe
   - 🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 03 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 04 (家宽) - xiaohe
 - name: AUTO
   type: url-test
   url: https://www.gstatic.com/generate_204
@@ -28,5 +40,7 @@ proxy-groups:
   proxies:
   - 🇹🇭 泰国 (Thailand) 01 (家宽) - xiaohe
   - 🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 03 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 04 (家宽) - xiaohe
 rules:
 - MATCH,PROXIES

@@ -6,16 +6,22 @@
     {
       "type": "socks",
       "tag": "🇮🇷 IR 01 - xiaohe",
-      "server": "78.38.67.210",
-      "server_port": 3636,
+      "server": "151.232.18.66",
+      "server_port": 5678,
       "version": "4"
     },
     {
       "type": "socks",
       "tag": "🇮🇷 IR 02 - xiaohe",
-      "server": "194.31.108.109",
-      "server_port": 2080,
+      "server": "78.38.67.210",
+      "server_port": 3636,
       "version": "4"
+    },
+    {
+      "type": "http",
+      "tag": "🇮🇷 IR 03 - xiaohe",
+      "server": "62.60.198.75",
+      "server_port": 3128
     },
     {
       "type": "selector",
@@ -23,7 +29,8 @@
       "outbounds": [
         "auto",
         "🇮🇷 IR 01 - xiaohe",
-        "🇮🇷 IR 02 - xiaohe"
+        "🇮🇷 IR 02 - xiaohe",
+        "🇮🇷 IR 03 - xiaohe"
       ]
     },
     {
@@ -31,7 +38,8 @@
       "tag": "auto",
       "outbounds": [
         "🇮🇷 IR 01 - xiaohe",
-        "🇮🇷 IR 02 - xiaohe"
+        "🇮🇷 IR 02 - xiaohe",
+        "🇮🇷 IR 03 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

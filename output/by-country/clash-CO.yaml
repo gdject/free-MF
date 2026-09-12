@@ -5,43 +5,53 @@ mode: rule
 log-level: info
 proxies:
 - name: 🇨🇴 哥伦比亚 (Colombia) 01 - xiaohe
-  server: 181.78.25.252
+  server: 181.78.23.187
   port: 999
   udp: false
   type: http
 - name: 🇨🇴 哥伦比亚 (Colombia) 02 - xiaohe
-  server: 201.184.239.75
-  port: 5678
-  udp: false
-  type: socks4
-- name: 🇨🇴 哥伦比亚 (Colombia) 03 - xiaohe
-  server: 181.78.74.252
+  server: 181.78.74.253
   port: 999
   udp: false
   type: http
+- name: 🇨🇴 哥伦比亚 (Colombia) 03 - xiaohe
+  server: 190.60.42.141
+  port: 555
+  udp: false
+  type: http
 - name: 🇨🇴 哥伦比亚 (Colombia) 04 - xiaohe
+  server: 191.97.8.101
+  port: 3128
+  udp: false
+  type: http
+- name: 🇨🇴 哥伦比亚 (Colombia) 05 - xiaohe
   server: 190.0.246.210
   port: 4040
   udp: false
   type: http
-- name: 🇨🇴 哥伦比亚 (Colombia) 05 - xiaohe
+- name: 🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe
+  server: 179.1.143.42
+  port: 999
+  udp: false
+  type: http
+- name: 🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe
+  server: 179.1.182.26
+  port: 999
+  udp: false
+  type: http
+- name: 🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe
+  server: 179.1.196.134
+  port: 999
+  udp: false
+  type: http
+- name: 🇨🇴 哥伦比亚 (Colombia) 09 - xiaohe
+  server: 190.60.60.37
+  port: 8080
+  udp: false
+  type: http
+- name: 🇨🇴 哥伦比亚 (Colombia) 10 - xiaohe
   server: 181.204.39.202
   port: 53740
-  udp: false
-  type: socks4
-- name: 🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe
-  server: 181.204.4.74
-  port: 5678
-  udp: false
-  type: socks4
-- name: 🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe
-  server: 191.102.82.83
-  port: 4153
-  udp: false
-  type: socks4
-- name: 🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe
-  server: 200.10.31.74
-  port: 49992
   udp: false
   type: socks4
 proxy-groups:
@@ -57,6 +67,8 @@ proxy-groups:
   - 🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe
   - 🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe
   - 🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe
+  - 🇨🇴 哥伦比亚 (Colombia) 09 - xiaohe
+  - 🇨🇴 哥伦比亚 (Colombia) 10 - xiaohe
 - name: AUTO
   type: url-test
   url: https://www.gstatic.com/generate_204
@@ -70,5 +82,7 @@ proxy-groups:
   - 🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe
   - 🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe
   - 🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe
+  - 🇨🇴 哥伦比亚 (Colombia) 09 - xiaohe
+  - 🇨🇴 哥伦比亚 (Colombia) 10 - xiaohe
 rules:
 - MATCH,PROXIES

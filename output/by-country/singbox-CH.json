@@ -37,22 +37,22 @@
       }
     },
     {
-      "type": "hysteria2",
+      "type": "http",
       "tag": "🇨🇭 瑞士 (Switzerland) 03 - xiaohe",
-      "server": "104.165.205.42",
-      "server_port": 8443,
-      "password": "52e3dd44-ed23-4030-b0cc-5b5a953f2d4d",
-      "tls": {
-        "enabled": true,
-        "server_name": "speedtestmark.com",
-        "insecure": false
-      }
+      "server": "185.191.239.248",
+      "server_port": 3128
+    },
+    {
+      "type": "http",
+      "tag": "🇨🇭 瑞士 (Switzerland) 04 - xiaohe",
+      "server": "104.238.21.113",
+      "server_port": 8888
     },
     {
       "type": "socks",
-      "tag": "🇨🇭 瑞士 (Switzerland) 04 - xiaohe",
+      "tag": "🇨🇭 瑞士 (Switzerland) 05 - xiaohe",
       "server": "45.74.31.42",
-      "server_port": 5026,
+      "server_port": 11887,
       "version": "5"
     },
     {
@@ -63,7 +63,8 @@
         "🇨🇭 瑞士 (Switzerland) 01 - xiaohe",
         "🇨🇭 瑞士 (Switzerland) 02 - xiaohe",
         "🇨🇭 瑞士 (Switzerland) 03 - xiaohe",
-        "🇨🇭 瑞士 (Switzerland) 04 - xiaohe"
+        "🇨🇭 瑞士 (Switzerland) 04 - xiaohe",
+        "🇨🇭 瑞士 (Switzerland) 05 - xiaohe"
       ]
     },
     {
@@ -73,7 +74,8 @@
         "🇨🇭 瑞士 (Switzerland) 01 - xiaohe",
         "🇨🇭 瑞士 (Switzerland) 02 - xiaohe",
         "🇨🇭 瑞士 (Switzerland) 03 - xiaohe",
-        "🇨🇭 瑞士 (Switzerland) 04 - xiaohe"
+        "🇨🇭 瑞士 (Switzerland) 04 - xiaohe",
+        "🇨🇭 瑞士 (Switzerland) 05 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

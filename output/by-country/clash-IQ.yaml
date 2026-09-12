@@ -5,8 +5,13 @@ mode: rule
 log-level: info
 proxies:
 - name: 🇮🇶 IQ 01 - xiaohe
-  server: 109.224.22.35
-  port: 51372
+  server: 109.224.12.170
+  port: 52015
+  udp: false
+  type: socks4
+- name: 🇮🇶 IQ 02 - xiaohe
+  server: 62.201.233.59
+  port: 4145
   udp: false
   type: socks4
 proxy-groups:
@@ -15,11 +20,13 @@ proxy-groups:
   proxies:
   - AUTO
   - 🇮🇶 IQ 01 - xiaohe
+  - 🇮🇶 IQ 02 - xiaohe
 - name: AUTO
   type: url-test
   url: https://www.gstatic.com/generate_204
   interval: 300
   proxies:
   - 🇮🇶 IQ 01 - xiaohe
+  - 🇮🇶 IQ 02 - xiaohe
 rules:
 - MATCH,PROXIES

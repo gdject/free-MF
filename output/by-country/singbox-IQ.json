@@ -6,8 +6,15 @@
     {
       "type": "socks",
       "tag": "🇮🇶 IQ 01 - xiaohe",
-      "server": "109.224.22.35",
-      "server_port": 51372,
+      "server": "109.224.12.170",
+      "server_port": 52015,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇮🇶 IQ 02 - xiaohe",
+      "server": "62.201.233.59",
+      "server_port": 4145,
       "version": "4"
     },
     {
@@ -15,14 +22,16 @@
       "tag": "select",
       "outbounds": [
         "auto",
-        "🇮🇶 IQ 01 - xiaohe"
+        "🇮🇶 IQ 01 - xiaohe",
+        "🇮🇶 IQ 02 - xiaohe"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "🇮🇶 IQ 01 - xiaohe"
+        "🇮🇶 IQ 01 - xiaohe",
+        "🇮🇶 IQ 02 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

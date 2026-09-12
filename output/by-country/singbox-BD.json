@@ -4,11 +4,10 @@
   },
   "outbounds": [
     {
-      "type": "socks",
+      "type": "http",
       "tag": "🇧🇩 孟加拉 (Bangladesh) 01 - xiaohe",
-      "server": "182.163.96.66",
-      "server_port": 1080,
-      "version": "5"
+      "server": "103.134.56.148",
+      "server_port": 8080
     },
     {
       "type": "socks",
@@ -27,51 +26,22 @@
     {
       "type": "socks",
       "tag": "🇧🇩 孟加拉 (Bangladesh) 04 - xiaohe",
-      "server": "59.152.97.233",
-      "server_port": 1080,
+      "server": "118.179.93.24",
+      "server_port": 9090,
       "version": "5"
     },
     {
       "type": "socks",
       "tag": "🇧🇩 孟加拉 (Bangladesh) 05 - xiaohe",
-      "server": "103.229.86.73",
-      "server_port": 8080,
+      "server": "202.40.179.18",
+      "server_port": 4145,
       "version": "4"
     },
     {
-      "type": "socks",
+      "type": "http",
       "tag": "🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe",
-      "server": "119.148.7.10",
-      "server_port": 22122,
-      "version": "5"
-    },
-    {
-      "type": "socks",
-      "tag": "🇧🇩 孟加拉 (Bangladesh) 07 - xiaohe",
-      "server": "103.151.74.29",
-      "server_port": 2025,
-      "version": "5"
-    },
-    {
-      "type": "socks",
-      "tag": "🇧🇩 孟加拉 (Bangladesh) 08 - xiaohe",
-      "server": "103.155.42.38",
-      "server_port": 1080,
-      "version": "4"
-    },
-    {
-      "type": "socks",
-      "tag": "🇧🇩 孟加拉 (Bangladesh) 09 - xiaohe",
-      "server": "103.115.255.225",
-      "server_port": 36331,
-      "version": "4"
-    },
-    {
-      "type": "socks",
-      "tag": "🇧🇩 孟加拉 (Bangladesh) 10 - xiaohe",
-      "server": "123.200.15.226",
-      "server_port": 1080,
-      "version": "4"
+      "server": "103.177.118.145",
+      "server_port": 8118
     },
     {
       "type": "selector",
@@ -83,11 +53,7 @@
         "🇧🇩 孟加拉 (Bangladesh) 03 - xiaohe",
         "🇧🇩 孟加拉 (Bangladesh) 04 - xiaohe",
         "🇧🇩 孟加拉 (Bangladesh) 05 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 07 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 08 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 09 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 10 - xiaohe"
+        "🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe"
       ]
     },
     {
@@ -99,11 +65,7 @@
         "🇧🇩 孟加拉 (Bangladesh) 03 - xiaohe",
         "🇧🇩 孟加拉 (Bangladesh) 04 - xiaohe",
         "🇧🇩 孟加拉 (Bangladesh) 05 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 07 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 08 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 09 - xiaohe",
-        "🇧🇩 孟加拉 (Bangladesh) 10 - xiaohe"
+        "🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe"
       ],
       "url": "https://www.gstatic.com/generate_204"
     },

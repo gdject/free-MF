@@ -18,16 +18,16 @@
     {
       "type": "socks",
       "tag": "🇧🇬 保加利亚 (Bulgaria) 02 - xiaohe",
-      "server": "213.149.156.87",
-      "server_port": 5678,
-      "version": "4"
+      "server": "31.211.142.115",
+      "server_port": 8192,
+      "version": "5"
     },
     {
       "type": "socks",
       "tag": "🇧🇬 保加利亚 (Bulgaria) 03 - xiaohe",
-      "server": "31.211.142.115",
-      "server_port": 8192,
-      "version": "5"
+      "server": "212.5.132.74",
+      "server_port": 5678,
+      "version": "4"
     },
     {
       "type": "selector",

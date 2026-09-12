@@ -1,0 +1,25 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇨🇾 塞浦路斯 (Cyprus) 01 (家宽) - xiaohe
+  server: 5.75.133.113
+  port: 10809
+  udp: false
+  type: socks5
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇨🇾 塞浦路斯 (Cyprus) 01 (家宽) - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇨🇾 塞浦路斯 (Cyprus) 01 (家宽) - xiaohe
+rules:
+- MATCH,PROXIES

@@ -1,0 +1,32 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇬🇹 GT 01 - xiaohe
+  server: 181.119.179.99
+  port: 8080
+  udp: false
+  type: http
+- name: 🇬🇹 GT 02 - xiaohe
+  server: 38.41.225.174
+  port: 8888
+  udp: false
+  type: socks4
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇬🇹 GT 01 - xiaohe
+  - 🇬🇹 GT 02 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇬🇹 GT 01 - xiaohe
+  - 🇬🇹 GT 02 - xiaohe
+rules:
+- MATCH,PROXIES

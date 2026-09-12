@@ -1,0 +1,88 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇧🇩 孟加拉 (Bangladesh) 01 - xiaohe
+  server: 182.163.96.66
+  port: 1080
+  udp: false
+  type: socks5
+- name: 🇧🇩 孟加拉 (Bangladesh) 02 - xiaohe
+  server: 202.5.50.151
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇧🇩 孟加拉 (Bangladesh) 03 - xiaohe
+  server: 103.149.75.82
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇧🇩 孟加拉 (Bangladesh) 04 - xiaohe
+  server: 59.152.97.233
+  port: 1080
+  udp: false
+  type: socks5
+- name: 🇧🇩 孟加拉 (Bangladesh) 05 - xiaohe
+  server: 103.229.86.73
+  port: 8080
+  udp: false
+  type: socks4
+- name: 🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe
+  server: 119.148.7.10
+  port: 22122
+  udp: false
+  type: socks5
+- name: 🇧🇩 孟加拉 (Bangladesh) 07 - xiaohe
+  server: 103.151.74.29
+  port: 2025
+  udp: false
+  type: socks5
+- name: 🇧🇩 孟加拉 (Bangladesh) 08 - xiaohe
+  server: 103.155.42.38
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇧🇩 孟加拉 (Bangladesh) 09 - xiaohe
+  server: 103.115.255.225
+  port: 36331
+  udp: false
+  type: socks4
+- name: 🇧🇩 孟加拉 (Bangladesh) 10 - xiaohe
+  server: 123.200.15.226
+  port: 1080
+  udp: false
+  type: socks4
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇧🇩 孟加拉 (Bangladesh) 01 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 02 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 03 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 04 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 05 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 07 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 08 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 09 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 10 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇧🇩 孟加拉 (Bangladesh) 01 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 02 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 03 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 04 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 05 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 06 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 07 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 08 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 09 - xiaohe
+  - 🇧🇩 孟加拉 (Bangladesh) 10 - xiaohe
+rules:
+- MATCH,PROXIES

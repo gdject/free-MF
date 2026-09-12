@@ -1,0 +1,46 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "outbounds": [
+    {
+      "type": "http",
+      "tag": "🇬🇹 GT 01 - xiaohe",
+      "server": "181.119.179.99",
+      "server_port": 8080
+    },
+    {
+      "type": "socks",
+      "tag": "🇬🇹 GT 02 - xiaohe",
+      "server": "38.41.225.174",
+      "server_port": 8888,
+      "version": "4"
+    },
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "🇬🇹 GT 01 - xiaohe",
+        "🇬🇹 GT 02 - xiaohe"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "🇬🇹 GT 01 - xiaohe",
+        "🇬🇹 GT 02 - xiaohe"
+      ],
+      "url": "https://www.gstatic.com/generate_204"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ]
+}

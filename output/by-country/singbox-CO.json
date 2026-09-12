@@ -1,0 +1,98 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "outbounds": [
+    {
+      "type": "http",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 01 - xiaohe",
+      "server": "181.78.25.252",
+      "server_port": 999
+    },
+    {
+      "type": "socks",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 02 - xiaohe",
+      "server": "201.184.239.75",
+      "server_port": 5678,
+      "version": "4"
+    },
+    {
+      "type": "http",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 03 - xiaohe",
+      "server": "181.78.74.252",
+      "server_port": 999
+    },
+    {
+      "type": "http",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 04 - xiaohe",
+      "server": "190.0.246.210",
+      "server_port": 4040
+    },
+    {
+      "type": "socks",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 05 - xiaohe",
+      "server": "181.204.39.202",
+      "server_port": 53740,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe",
+      "server": "181.204.4.74",
+      "server_port": 5678,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe",
+      "server": "191.102.82.83",
+      "server_port": 4153,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe",
+      "server": "200.10.31.74",
+      "server_port": 49992,
+      "version": "4"
+    },
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "🇨🇴 哥伦比亚 (Colombia) 01 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 02 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 03 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 04 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 05 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "🇨🇴 哥伦比亚 (Colombia) 01 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 02 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 03 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 04 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 05 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 06 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 07 - xiaohe",
+        "🇨🇴 哥伦比亚 (Colombia) 08 - xiaohe"
+      ],
+      "url": "https://www.gstatic.com/generate_204"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ]
+}

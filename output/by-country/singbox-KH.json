@@ -1,0 +1,56 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "outbounds": [
+    {
+      "type": "socks",
+      "tag": "🇰🇭 柬埔寨 (Cambodia) 01 - xiaohe",
+      "server": "103.197.241.209",
+      "server_port": 1080,
+      "version": "5"
+    },
+    {
+      "type": "socks",
+      "tag": "🇰🇭 柬埔寨 (Cambodia) 02 - xiaohe",
+      "server": "202.62.50.52",
+      "server_port": 1080,
+      "version": "5"
+    },
+    {
+      "type": "socks",
+      "tag": "🇰🇭 柬埔寨 (Cambodia) 03 - xiaohe",
+      "server": "111.67.103.90",
+      "server_port": 1080,
+      "version": "5"
+    },
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "🇰🇭 柬埔寨 (Cambodia) 01 - xiaohe",
+        "🇰🇭 柬埔寨 (Cambodia) 02 - xiaohe",
+        "🇰🇭 柬埔寨 (Cambodia) 03 - xiaohe"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "🇰🇭 柬埔寨 (Cambodia) 01 - xiaohe",
+        "🇰🇭 柬埔寨 (Cambodia) 02 - xiaohe",
+        "🇰🇭 柬埔寨 (Cambodia) 03 - xiaohe"
+      ],
+      "url": "https://www.gstatic.com/generate_204"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ]
+}

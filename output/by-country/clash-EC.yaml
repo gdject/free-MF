@@ -1,0 +1,53 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇪🇨 EC 01 - xiaohe
+  server: 45.163.207.18
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇪🇨 EC 02 - xiaohe
+  server: 190.12.150.244
+  port: 999
+  udp: false
+  type: http
+- name: 🇪🇨 EC 03 - xiaohe
+  server: 45.238.56.249
+  port: 2010
+  udp: false
+  type: http
+- name: 🇪🇨 EC 04 - xiaohe
+  server: 177.234.217.84
+  port: 999
+  udp: false
+  type: http
+- name: 🇪🇨 EC 05 - xiaohe
+  server: 45.71.115.17
+  port: 1080
+  udp: false
+  type: socks4
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇪🇨 EC 01 - xiaohe
+  - 🇪🇨 EC 02 - xiaohe
+  - 🇪🇨 EC 03 - xiaohe
+  - 🇪🇨 EC 04 - xiaohe
+  - 🇪🇨 EC 05 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇪🇨 EC 01 - xiaohe
+  - 🇪🇨 EC 02 - xiaohe
+  - 🇪🇨 EC 03 - xiaohe
+  - 🇪🇨 EC 04 - xiaohe
+  - 🇪🇨 EC 05 - xiaohe
+rules:
+- MATCH,PROXIES

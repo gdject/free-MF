@@ -1,0 +1,87 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "outbounds": [
+    {
+      "type": "http",
+      "tag": "🇵🇭 菲律宾 (Philippines) 01 - xiaohe",
+      "server": "180.191.143.33",
+      "server_port": 8081
+    },
+    {
+      "type": "http",
+      "tag": "🇵🇭 菲律宾 (Philippines) 02 - xiaohe",
+      "server": "124.105.110.52",
+      "server_port": 8082
+    },
+    {
+      "type": "http",
+      "tag": "🇵🇭 菲律宾 (Philippines) 03 - xiaohe",
+      "server": "119.93.207.214",
+      "server_port": 8082
+    },
+    {
+      "type": "socks",
+      "tag": "🇵🇭 菲律宾 (Philippines) 04 - xiaohe",
+      "server": "103.239.201.50",
+      "server_port": 58765,
+      "version": "5"
+    },
+    {
+      "type": "socks",
+      "tag": "🇵🇭 菲律宾 (Philippines) 05 - xiaohe",
+      "server": "124.105.55.176",
+      "server_port": 30906,
+      "version": "4"
+    },
+    {
+      "type": "http",
+      "tag": "🇵🇭 菲律宾 (Philippines) 06 - xiaohe",
+      "server": "119.93.151.254",
+      "server_port": 8081
+    },
+    {
+      "type": "http",
+      "tag": "🇵🇭 菲律宾 (Philippines) 07 - xiaohe",
+      "server": "119.93.153.250",
+      "server_port": 8082
+    },
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "🇵🇭 菲律宾 (Philippines) 01 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 02 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 03 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 04 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 05 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 06 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 07 - xiaohe"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "🇵🇭 菲律宾 (Philippines) 01 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 02 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 03 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 04 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 05 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 06 - xiaohe",
+        "🇵🇭 菲律宾 (Philippines) 07 - xiaohe"
+      ],
+      "url": "https://www.gstatic.com/generate_204"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ]
+}

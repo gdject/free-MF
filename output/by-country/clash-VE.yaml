@@ -1,0 +1,81 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇻🇪 VE 01 - xiaohe
+  server: 190.97.236.128
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 02 - xiaohe
+  server: 154.3.76.14
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 03 - xiaohe
+  server: 200.90.52.154
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 04 - xiaohe
+  server: 38.172.184.150
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 05 - xiaohe
+  server: 190.97.241.106
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 06 - xiaohe
+  server: 201.71.2.27
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 07 - xiaohe
+  server: 38.51.207.104
+  port: 8080
+  udp: false
+  type: http
+- name: 🇻🇪 VE 08 - xiaohe
+  server: 38.172.170.193
+  port: 999
+  udp: false
+  type: http
+- name: 🇻🇪 VE 09 - xiaohe
+  server: 154.59.56.72
+  port: 999
+  udp: false
+  type: http
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇻🇪 VE 01 - xiaohe
+  - 🇻🇪 VE 02 - xiaohe
+  - 🇻🇪 VE 03 - xiaohe
+  - 🇻🇪 VE 04 - xiaohe
+  - 🇻🇪 VE 05 - xiaohe
+  - 🇻🇪 VE 06 - xiaohe
+  - 🇻🇪 VE 07 - xiaohe
+  - 🇻🇪 VE 08 - xiaohe
+  - 🇻🇪 VE 09 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇻🇪 VE 01 - xiaohe
+  - 🇻🇪 VE 02 - xiaohe
+  - 🇻🇪 VE 03 - xiaohe
+  - 🇻🇪 VE 04 - xiaohe
+  - 🇻🇪 VE 05 - xiaohe
+  - 🇻🇪 VE 06 - xiaohe
+  - 🇻🇪 VE 07 - xiaohe
+  - 🇻🇪 VE 08 - xiaohe
+  - 🇻🇪 VE 09 - xiaohe
+rules:
+- MATCH,PROXIES

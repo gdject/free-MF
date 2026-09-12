@@ -1,0 +1,148 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇹🇷 土耳其 (Turkey) 01 - xiaohe
+  server: 45.155.125.143
+  port: 3128
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 02 - xiaohe
+  server: 185.15.198.18
+  port: 35035
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 03 - xiaohe
+  server: 45.155.125.166
+  port: 17391
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 04 - xiaohe
+  server: 45.155.125.199
+  port: 17391
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 05 - xiaohe
+  server: 85.100.43.172
+  port: 3129
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 06 - xiaohe
+  server: 45.155.125.77
+  port: 17391
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 07 - xiaohe
+  server: 45.155.125.110
+  port: 17391
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 08 - xiaohe
+  server: 45.155.125.122
+  port: 17391
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 09 - xiaohe
+  server: 185.195.254.72
+  port: 5432
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 10 - xiaohe
+  server: 85.104.123.176
+  port: 808
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 11 - xiaohe
+  server: 212.174.53.16
+  port: 3310
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 12 - xiaohe
+  server: 162.159.91.222
+  port: 443
+  udp: true
+  type: vless
+  uuid: 50414e45-4c5f-5a45-5553-723a643df685
+  tls: true
+  servername: n3zaxce7u0es.crzl48eiuses.workers.dev
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /stream/PANEL_ZEUS/723a643df685/loc-0
+    headers:
+      Host: n3zaxce7u0es.crzl48eiuses.workers.dev
+- name: 🇹🇷 土耳其 (Turkey) 13 - xiaohe
+  server: 170.168.97.8
+  port: 8443
+  udp: true
+  type: vless
+  uuid: 3f9f2bda-0b9c-8469-7381-a73de2255619
+  tls: true
+  reality-opts:
+    public-key: D2SXHZRRYM0WcFChGWd57XB-U73aIsGfMpe2-Gq5XSs
+  servername: download.nvidia.com
+  client-fingerprint: chrome
+  network: grpc
+  grpc-opts:
+    grpc-service-name: TunService
+- name: 🇹🇷 土耳其 (Turkey) 14 - xiaohe
+  server: 85.104.3.232
+  port: 3310
+  udp: false
+  type: http
+- name: 🇹🇷 土耳其 (Turkey) 15 - xiaohe
+  server: 147.45.66.116
+  port: 1082
+  udp: false
+  type: socks5
+- name: 🇹🇷 土耳其 (Turkey) 16 - xiaohe
+  server: 109.224.242.233
+  port: 8080
+  udp: false
+  type: http
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇹🇷 土耳其 (Turkey) 01 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 02 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 03 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 04 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 05 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 06 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 07 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 08 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 09 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 10 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 11 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 12 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 13 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 14 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 15 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 16 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇹🇷 土耳其 (Turkey) 01 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 02 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 03 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 04 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 05 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 06 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 07 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 08 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 09 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 10 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 11 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 12 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 13 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 14 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 15 - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 16 - xiaohe
+rules:
+- MATCH,PROXIES

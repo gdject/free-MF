@@ -1,0 +1,336 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇺🇸 美国 (United States) 01 (家宽) - xiaohe
+  server: 188.114.97.6
+  port: 2095
+  udp: true
+  type: vless
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  network: ws
+  ws-opts:
+    path: /?ed=2560
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+- name: 🇺🇸 美国 (United States) 02 (家宽) - xiaohe
+  server: 216.36.124.176
+  port: 29513
+  udp: true
+  type: vless
+  uuid: f618d6e9-c6af-40b8-bc7a-bbf450586784
+  flow: xtls-rprx-vision
+  tls: true
+  reality-opts:
+    public-key: rSI9mgtOco9D39xdbX64nv2J2BRBGQpgCOi4opw8mCo
+    short-id: 6ba85179e30d4fc2
+  servername: addons.mozilla.org
+  client-fingerprint: random
+- name: 🇺🇸 美国 (United States) 03 (家宽) - xiaohe
+  server: 50.238.47.86
+  port: 32100
+  udp: false
+  type: socks4
+- name: 🇺🇸 美国 (United States) 04 (家宽) - xiaohe
+  server: 178.95.170.115
+  port: 2087
+  udp: true
+  type: vless
+  uuid: bf443e4a-aa9e-4509-abf0-d0f6828d57be
+  network: ws
+  ws-opts:
+    path: /4bc027a44532
+- name: 🇹🇼 中国台湾 (Taiwan) 05 (家宽) - xiaohe
+  server: 36.224.152.189
+  port: 50099
+  udp: true
+  type: ss
+  cipher: chacha20-ietf-poly1305
+  password: 7e731ec3-f8e1-43f6-92cf-3978d14705c4
+- name: 🇰🇷 韩国 (South Korea) 06 (家宽) - xiaohe
+  server: 49.254.204.133
+  port: 1774
+  udp: true
+  type: ss
+  cipher: aes-256-cfb
+  password: 1234!@#$
+- name: 🇰🇷 韩国 (South Korea) 07 (家宽) - xiaohe
+  server: 1.231.81.166
+  port: 3128
+  udp: false
+  type: http
+- name: 🇦🇱 AL 08 (家宽) - xiaohe
+  server: 109.236.45.95
+  port: 8989
+  udp: false
+  type: http
+- name: 🇰🇷 韩国 (South Korea) 09 (家宽) - xiaohe
+  server: 121.169.46.116
+  port: 1090
+  udp: false
+  type: socks5
+- name: 🇨🇾 塞浦路斯 (Cyprus) 10 (家宽) - xiaohe
+  server: 5.75.133.113
+  port: 10809
+  udp: false
+  type: socks5
+- name: 🇺🇸 美国 (United States) 11 (家宽) - xiaohe
+  server: 198.0.198.132
+  port: 54321
+  udp: false
+  type: socks4
+- name: 🇮🇳 印度 (India) 12 (家宽) - xiaohe
+  server: 117.236.124.166
+  port: 3128
+  udp: false
+  type: http
+- name: 🇵🇭 菲律宾 (Philippines) 13 (家宽) - xiaohe
+  server: 49.150.243.88
+  port: 8081
+  udp: false
+  type: http
+- name: 🇷🇺 俄罗斯 (Russia) 14 (家宽) - xiaohe
+  server: 212.33.248.45
+  port: 1080
+  udp: false
+  type: socks5
+- name: 🇨🇿 捷克 (Czech) 15 (家宽) - xiaohe
+  server: 109.69.211.18
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇮🇳 印度 (India) 16 (家宽) - xiaohe
+  server: 14.139.235.82
+  port: 3128
+  udp: false
+  type: http
+- name: 🇹🇼 中国台湾 (Taiwan) 17 (家宽) - xiaohe
+  server: 118.167.209.5
+  port: 24215
+  udp: true
+  type: vless
+  uuid: 19d5a678-8396-4e3b-93da-ece618d0e83a
+  tls: true
+  reality-opts:
+    public-key: mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE
+  servername: addons.mozilla.org
+  client-fingerprint: firefox
+- name: 🇲🇽 墨西哥 (Mexico) 18 (家宽) - xiaohe
+  server: 206.135.56.50
+  port: 8080
+  udp: false
+  type: http
+- name: 🇺🇸 美国 (United States) 19 (家宽) - xiaohe
+  server: 50.250.205.21
+  port: 32100
+  udp: false
+  type: socks4
+- name: 🇭🇰 中国香港 (Hong Kong) 20 (家宽) - xiaohe
+  server: 119.246.1.143
+  port: 443
+  udp: true
+  type: trojan
+  password: BxceQaOe
+  sni: 119.246.1.143
+  skip-cert-verify: true
+- name: 🇭🇳 HN 21 (移动家宽) - xiaohe
+  server: 181.115.74.172
+  port: 5678
+  udp: false
+  type: socks4
+- name: 🇫🇷 法国 (France) 22 (家宽) - xiaohe
+  server: 37.59.125.131
+  port: 8888
+  udp: false
+  type: http
+- name: 🇨🇱 智利 (Chile) 23 (家宽) - xiaohe
+  server: 186.148.47.254
+  port: 999
+  udp: false
+  type: http
+- name: 🇦🇷 阿根廷 (Argentina) 24 (家宽) - xiaohe
+  server: 200.70.56.84
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇺🇸 美国 (United States) 25 (家宽) - xiaohe
+  server: 70.60.132.130
+  port: 5678
+  udp: false
+  type: socks4
+- name: 🇦🇷 阿根廷 (Argentina) 26 (家宽) - xiaohe
+  server: 190.122.144.23
+  port: 5678
+  udp: false
+  type: socks4
+- name: 🇧🇷 巴西 (Brazil) 27 (家宽) - xiaohe
+  server: 167.250.137.129
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇹🇭 泰国 (Thailand) 28 (家宽) - xiaohe
+  server: 180.183.149.236
+  port: 5678
+  udp: false
+  type: socks4
+- name: 🇮🇩 印尼 (Indonesia) 29 (家宽) - xiaohe
+  server: 160.22.198.17
+  port: 8082
+  udp: false
+  type: http
+- name: 🇹🇼 中国台湾 (Taiwan) 30 (家宽) - xiaohe
+  server: 220.132.41.160
+  port: 1088
+  udp: false
+  type: socks4
+- name: 🇨🇴 哥伦比亚 (Colombia) 31 (家宽) - xiaohe
+  server: 201.184.60.20
+  port: 999
+  udp: false
+  type: http
+- name: 🇹🇭 泰国 (Thailand) 32 (家宽) - xiaohe
+  server: 1.179.172.45
+  port: 31225
+  udp: false
+  type: socks4
+- name: 🇷🇺 俄罗斯 (Russia) 33 (家宽) - xiaohe
+  server: 109.191.10.98
+  port: 1080
+  udp: false
+  type: socks5
+- name: 🇪🇸 西班牙 (Spain) 34 (家宽) - xiaohe
+  server: 83.56.15.57
+  port: 5678
+  udp: false
+  type: socks4
+- name: 🇹🇷 土耳其 (Turkey) 35 (家宽) - xiaohe
+  server: 85.105.194.113
+  port: 4153
+  udp: false
+  type: socks4
+- name: 🇦🇷 阿根廷 (Argentina) 36 (家宽) - xiaohe
+  server: 181.168.162.63
+  port: 8080
+  udp: false
+  type: http
+- name: 🇮🇩 印尼 (Indonesia) 37 (家宽) - xiaohe
+  server: 103.176.97.44
+  port: 8082
+  udp: false
+  type: http
+- name: 🇺🇸 美国 (United States) 38 (家宽) - xiaohe
+  server: 74.62.23.242
+  port: 39593
+  udp: false
+  type: socks4
+- name: 🇳🇵 尼泊尔 (Nepal) 39 (家宽) - xiaohe
+  server: 110.34.3.144
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇹🇷 土耳其 (Turkey) 40 (家宽) - xiaohe
+  server: 95.3.69.222
+  port: 8080
+  udp: false
+  type: http
+- name: 🇧🇷 巴西 (Brazil) 41 (家宽) - xiaohe
+  server: 181.233.94.101
+  port: 1080
+  udp: false
+  type: socks4
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇺🇸 美国 (United States) 01 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 02 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 03 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 04 (家宽) - xiaohe
+  - 🇹🇼 中国台湾 (Taiwan) 05 (家宽) - xiaohe
+  - 🇰🇷 韩国 (South Korea) 06 (家宽) - xiaohe
+  - 🇰🇷 韩国 (South Korea) 07 (家宽) - xiaohe
+  - 🇦🇱 AL 08 (家宽) - xiaohe
+  - 🇰🇷 韩国 (South Korea) 09 (家宽) - xiaohe
+  - 🇨🇾 塞浦路斯 (Cyprus) 10 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 11 (家宽) - xiaohe
+  - 🇮🇳 印度 (India) 12 (家宽) - xiaohe
+  - 🇵🇭 菲律宾 (Philippines) 13 (家宽) - xiaohe
+  - 🇷🇺 俄罗斯 (Russia) 14 (家宽) - xiaohe
+  - 🇨🇿 捷克 (Czech) 15 (家宽) - xiaohe
+  - 🇮🇳 印度 (India) 16 (家宽) - xiaohe
+  - 🇹🇼 中国台湾 (Taiwan) 17 (家宽) - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 18 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 19 (家宽) - xiaohe
+  - 🇭🇰 中国香港 (Hong Kong) 20 (家宽) - xiaohe
+  - 🇭🇳 HN 21 (移动家宽) - xiaohe
+  - 🇫🇷 法国 (France) 22 (家宽) - xiaohe
+  - 🇨🇱 智利 (Chile) 23 (家宽) - xiaohe
+  - 🇦🇷 阿根廷 (Argentina) 24 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 25 (家宽) - xiaohe
+  - 🇦🇷 阿根廷 (Argentina) 26 (家宽) - xiaohe
+  - 🇧🇷 巴西 (Brazil) 27 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 28 (家宽) - xiaohe
+  - 🇮🇩 印尼 (Indonesia) 29 (家宽) - xiaohe
+  - 🇹🇼 中国台湾 (Taiwan) 30 (家宽) - xiaohe
+  - 🇨🇴 哥伦比亚 (Colombia) 31 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 32 (家宽) - xiaohe
+  - 🇷🇺 俄罗斯 (Russia) 33 (家宽) - xiaohe
+  - 🇪🇸 西班牙 (Spain) 34 (家宽) - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 35 (家宽) - xiaohe
+  - 🇦🇷 阿根廷 (Argentina) 36 (家宽) - xiaohe
+  - 🇮🇩 印尼 (Indonesia) 37 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 38 (家宽) - xiaohe
+  - 🇳🇵 尼泊尔 (Nepal) 39 (家宽) - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 40 (家宽) - xiaohe
+  - 🇧🇷 巴西 (Brazil) 41 (家宽) - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇺🇸 美国 (United States) 01 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 02 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 03 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 04 (家宽) - xiaohe
+  - 🇹🇼 中国台湾 (Taiwan) 05 (家宽) - xiaohe
+  - 🇰🇷 韩国 (South Korea) 06 (家宽) - xiaohe
+  - 🇰🇷 韩国 (South Korea) 07 (家宽) - xiaohe
+  - 🇦🇱 AL 08 (家宽) - xiaohe
+  - 🇰🇷 韩国 (South Korea) 09 (家宽) - xiaohe
+  - 🇨🇾 塞浦路斯 (Cyprus) 10 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 11 (家宽) - xiaohe
+  - 🇮🇳 印度 (India) 12 (家宽) - xiaohe
+  - 🇵🇭 菲律宾 (Philippines) 13 (家宽) - xiaohe
+  - 🇷🇺 俄罗斯 (Russia) 14 (家宽) - xiaohe
+  - 🇨🇿 捷克 (Czech) 15 (家宽) - xiaohe
+  - 🇮🇳 印度 (India) 16 (家宽) - xiaohe
+  - 🇹🇼 中国台湾 (Taiwan) 17 (家宽) - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 18 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 19 (家宽) - xiaohe
+  - 🇭🇰 中国香港 (Hong Kong) 20 (家宽) - xiaohe
+  - 🇭🇳 HN 21 (移动家宽) - xiaohe
+  - 🇫🇷 法国 (France) 22 (家宽) - xiaohe
+  - 🇨🇱 智利 (Chile) 23 (家宽) - xiaohe
+  - 🇦🇷 阿根廷 (Argentina) 24 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 25 (家宽) - xiaohe
+  - 🇦🇷 阿根廷 (Argentina) 26 (家宽) - xiaohe
+  - 🇧🇷 巴西 (Brazil) 27 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 28 (家宽) - xiaohe
+  - 🇮🇩 印尼 (Indonesia) 29 (家宽) - xiaohe
+  - 🇹🇼 中国台湾 (Taiwan) 30 (家宽) - xiaohe
+  - 🇨🇴 哥伦比亚 (Colombia) 31 (家宽) - xiaohe
+  - 🇹🇭 泰国 (Thailand) 32 (家宽) - xiaohe
+  - 🇷🇺 俄罗斯 (Russia) 33 (家宽) - xiaohe
+  - 🇪🇸 西班牙 (Spain) 34 (家宽) - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 35 (家宽) - xiaohe
+  - 🇦🇷 阿根廷 (Argentina) 36 (家宽) - xiaohe
+  - 🇮🇩 印尼 (Indonesia) 37 (家宽) - xiaohe
+  - 🇺🇸 美国 (United States) 38 (家宽) - xiaohe
+  - 🇳🇵 尼泊尔 (Nepal) 39 (家宽) - xiaohe
+  - 🇹🇷 土耳其 (Turkey) 40 (家宽) - xiaohe
+  - 🇧🇷 巴西 (Brazil) 41 (家宽) - xiaohe
+rules:
+- MATCH,PROXIES

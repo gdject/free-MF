@@ -1,0 +1,74 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇲🇽 墨西哥 (Mexico) 01 - xiaohe
+  server: 38.224.223.173
+  port: 999
+  udp: false
+  type: http
+- name: 🇲🇽 墨西哥 (Mexico) 02 - xiaohe
+  server: 187.210.136.88
+  port: 4153
+  udp: false
+  type: socks4
+- name: 🇲🇽 墨西哥 (Mexico) 03 - xiaohe
+  server: 45.142.43.6
+  port: 999
+  udp: false
+  type: http
+- name: 🇲🇽 墨西哥 (Mexico) 04 - xiaohe
+  server: 186.96.178.72
+  port: 8081
+  udp: false
+  type: http
+- name: 🇲🇽 墨西哥 (Mexico) 05 - xiaohe
+  server: 189.202.204.53
+  port: 1080
+  udp: false
+  type: socks4
+- name: 🇲🇽 墨西哥 (Mexico) 06 - xiaohe
+  server: 38.194.253.82
+  port: 999
+  udp: false
+  type: http
+- name: 🇲🇽 墨西哥 (Mexico) 07 - xiaohe
+  server: 38.194.253.51
+  port: 999
+  udp: false
+  type: http
+- name: 🇲🇽 墨西哥 (Mexico) 08 - xiaohe
+  server: 189.51.168.164
+  port: 999
+  udp: false
+  type: http
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇲🇽 墨西哥 (Mexico) 01 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 02 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 03 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 04 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 05 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 06 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 07 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 08 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇲🇽 墨西哥 (Mexico) 01 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 02 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 03 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 04 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 05 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 06 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 07 - xiaohe
+  - 🇲🇽 墨西哥 (Mexico) 08 - xiaohe
+rules:
+- MATCH,PROXIES

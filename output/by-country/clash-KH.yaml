@@ -1,0 +1,39 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇰🇭 柬埔寨 (Cambodia) 01 - xiaohe
+  server: 103.197.241.209
+  port: 1080
+  udp: false
+  type: socks5
+- name: 🇰🇭 柬埔寨 (Cambodia) 02 - xiaohe
+  server: 202.62.50.52
+  port: 1080
+  udp: false
+  type: socks5
+- name: 🇰🇭 柬埔寨 (Cambodia) 03 - xiaohe
+  server: 111.67.103.90
+  port: 1080
+  udp: false
+  type: socks5
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇰🇭 柬埔寨 (Cambodia) 01 - xiaohe
+  - 🇰🇭 柬埔寨 (Cambodia) 02 - xiaohe
+  - 🇰🇭 柬埔寨 (Cambodia) 03 - xiaohe
+- name: AUTO
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - 🇰🇭 柬埔寨 (Cambodia) 01 - xiaohe
+  - 🇰🇭 柬埔寨 (Cambodia) 02 - xiaohe
+  - 🇰🇭 柬埔寨 (Cambodia) 03 - xiaohe
+rules:
+- MATCH,PROXIES

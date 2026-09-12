@@ -1,0 +1,92 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "outbounds": [
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 01 - xiaohe",
+      "server": "195.200.245.132",
+      "server_port": 1080,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 02 - xiaohe",
+      "server": "194.31.212.115",
+      "server_port": 1080,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 03 - xiaohe",
+      "server": "185.210.85.26",
+      "server_port": 56981,
+      "version": "5"
+    },
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 04 - xiaohe",
+      "server": "212.3.127.242",
+      "server_port": 10801,
+      "version": "5"
+    },
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 05 - xiaohe",
+      "server": "178.150.77.204",
+      "server_port": 10801,
+      "version": "5"
+    },
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 06 - xiaohe",
+      "server": "195.78.100.186",
+      "server_port": 3629,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇺🇦 乌克兰 (Ukraine) 07 - xiaohe",
+      "server": "195.78.100.162",
+      "server_port": 3629,
+      "version": "4"
+    },
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "🇺🇦 乌克兰 (Ukraine) 01 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 02 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 03 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 04 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 05 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 06 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 07 - xiaohe"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "🇺🇦 乌克兰 (Ukraine) 01 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 02 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 03 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 04 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 05 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 06 - xiaohe",
+        "🇺🇦 乌克兰 (Ukraine) 07 - xiaohe"
+      ],
+      "url": "https://www.gstatic.com/generate_204"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ]
+}

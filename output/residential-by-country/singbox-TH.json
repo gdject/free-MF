@@ -1,0 +1,47 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "outbounds": [
+    {
+      "type": "socks",
+      "tag": "🇹🇭 泰国 (Thailand) 01 (家宽) - xiaohe",
+      "server": "180.183.149.236",
+      "server_port": 5678,
+      "version": "4"
+    },
+    {
+      "type": "socks",
+      "tag": "🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe",
+      "server": "1.179.172.45",
+      "server_port": 31225,
+      "version": "4"
+    },
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "🇹🇭 泰国 (Thailand) 01 (家宽) - xiaohe",
+        "🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "🇹🇭 泰国 (Thailand) 01 (家宽) - xiaohe",
+        "🇹🇭 泰国 (Thailand) 02 (家宽) - xiaohe"
+      ],
+      "url": "https://www.gstatic.com/generate_204"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ]
+}

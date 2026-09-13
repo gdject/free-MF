@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "仅预览，不删除运行记录"
+        description: "仅预览，不删除运行记录（默认不勾选即直接删除）"
         required: true
-        default: true
+        default: false
         type: boolean
       retention_days:
         description: "保留最近多少天的记录；0 表示清理全部已完成记录"

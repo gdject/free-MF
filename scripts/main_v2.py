@@ -2333,7 +2333,7 @@ def export_all(unique_nodes, residential, non_residential):
             if v2ray_link:
                 links.append(v2ray_link)
             cp = outbound_to_clash(ob, name)
-            if cp:
+            if cp and not (ob.get("type") == "socks" and str(ob.get("version", "5")) == "4"):
                 proxies.append(cp)
             sb_nodes.append(outbound_to_singbox(ob, name))
         return links, proxies, sb_nodes

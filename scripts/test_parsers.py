@@ -145,9 +145,25 @@ def test_export_format_counts():
         }
         vless = dict(base, outbound={"type": "vless", "server": "v.example.com", "server_port": 443, "uuid": "00000000-0000-0000-0000-000000000001"})
         http = dict(base, outbound={"type": "http", "server": "1.2.3.4", "server_port": 8080}, country="AR")
-        stats = mv.export_all([vless, http], [], [vless, http])
-        assert stats["all"] == {"v2ray": 1, "clash": 2, "singbox": 2}
+        socks4 = dict(base, outbound={"type": "socks", "server": "4.3.2.1", "server_port": 1080, "version": "4"}, country="CA")
+        socks5 = dict(base, outbound={"type": "socks", "server": "5.3.2.1", "server_port": 1080, "version": "5"}, country="GB")
+        stats = mv.export_all([vless, http, socks4, socks5], [], [vless, http, socks4, socks5])
+        assert stats["all"] == {"v2ray": 1, "clash": 3, "singbox": 4}
         assert stats["by_country"]["AR"] == {"v2ray": 0, "clash": 1, "singbox": 1}
+        assert stats["by_country"]["CA"] == {"v2ray": 0, "clash": 0, "singbox": 1}
+        with open(os.path.join(tmp, "clash.yaml"), encoding="utf-8") as f:
+            clash = mv.yaml.safe_load(f)
+        clash_names = {proxy["name"] for proxy in clash["proxies"]}
+        assert not any(proxy["type"] == "socks4" for proxy in clash["proxies"])
+        assert any(proxy["type"] == "socks5" for proxy in clash["proxies"])
+        assert set(clash["proxy-groups"][0]["proxies"]) == {"AUTO"} | clash_names
+        assert set(clash["proxy-groups"][1]["proxies"]) == clash_names
+        with open(os.path.join(tmp, "singbox.json"), encoding="utf-8") as f:
+            singbox = json.load(f)
+        assert any(node["type"] == "socks" and node["version"] == "4" for node in singbox["outbounds"])
+        with open(os.path.join(tmp, "v2ray.txt"), encoding="utf-8") as f:
+            v2ray_links = mv.base64.b64decode(f.read()).decode().splitlines()
+        assert len(v2ray_links) == 1
     mv.OUTPUT_DIR = old_output
     mv.COUNTRY_DIR = old_country
     mv.RESIDENTIAL_COUNTRY_DIR = old_res_country
